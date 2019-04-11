@@ -29,9 +29,21 @@ import android.util.Log;
 import com.aletheiaware.bc.android.BuildConfig;
 import com.aletheiaware.bc.android.R;
 
+import com.aletheiaware.bc.BC.Channel;
+import com.aletheiaware.bc.BC.Channel.RecordCallback;
 import com.aletheiaware.bc.BC.Node;
+import com.aletheiaware.bc.BCProto.Block;
+import com.aletheiaware.bc.BCProto.BlockEntry;
+import com.aletheiaware.bc.android.ui.StripeDialog;
 import com.aletheiaware.bc.utils.BCUtils;
+import com.aletheiaware.finance.FinanceProto.Customer;
+import com.aletheiaware.finance.utils.FinanceUtils;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.stripe.android.model.Token;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.InetAddress;
@@ -95,6 +107,56 @@ public class BCAndroidUtils {
                 ab.setMessage(R.string.delete_keys_legalese);
                 ab.setPositiveButton(R.string.delete_keys_action, listener);
                 ab.show();
+            }
+        });
+    }
+
+    public static boolean isCustomer(File cache) throws IOException {
+        final Channel customers = new Channel(FinanceUtils.CUSTOMER_CHANNEL, BCUtils.THRESHOLD_STANDARD, cache, getBCHost());
+        final String alias = BCAndroidUtils.getAlias();
+        final KeyPair keys = BCAndroidUtils.getKeyPair();
+        final Customer.Builder cb = Customer.newBuilder();
+        customers.read(alias, keys, null, new RecordCallback() {
+            @Override
+            public boolean onRecord(ByteString blockHash, Block block, BlockEntry blockEntry, byte[] key, byte[] payload) {
+                try {
+                    cb.mergeFrom(payload);
+                    return false;
+                } catch (InvalidProtocolBufferException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
+        final Customer customer = cb.build();
+        String customerId = customer.getCustomerId();
+        return customerId != null && !customerId.isEmpty();
+    }
+
+    public interface RegistrationCallback {
+        void onRegistered(String customerId);
+    }
+
+    public static void registerCustomer(final Activity parent, final RegistrationCallback callback) {
+        parent.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new StripeDialog(parent, null) {
+                    @Override
+                    public void onSubmit(String email, Token token) {
+                        String website = parent.getString(R.string.register_account_address);
+                        String alias = getAlias();
+                        String customerId = null;
+                        try {
+                            customerId = BCUtils.register(website, alias, email, token.getId());
+                        } catch (IOException e) {
+                            showErrorDialog(parent, R.string.error_registering, e);
+                        }
+                        if (customerId != null && !customerId.isEmpty()) {
+                            callback.onRegistered(customerId);
+                        }
+                    }
+                }.create();
             }
         });
     }
@@ -189,7 +251,7 @@ public class BCAndroidUtils {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{parent.getString(R.string.support_email)});
-        intent.putExtra(Intent.EXTRA_SUBJECT, parent.getString(R.string.support_subject));
+        intent.putExtra(Intent.EXTRA_SUBJECT, parent.getString(R.string.support_subject) + parent.getString(R.string.app_name));
         intent.putExtra(Intent.EXTRA_TEXT, content.toString());
         parent.startActivity(intent);
     }

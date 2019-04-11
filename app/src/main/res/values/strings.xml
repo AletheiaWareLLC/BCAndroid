@@ -15,6 +15,7 @@ limitations under the License.
 -->
 <resources>
 
+    <string name="app_name">App Name</string>
     <string name="app_logo">App Logo</string>
     <string name="aletheia_ware_llc_logo">Aletheia Ware LLC Logo</string>
 
@@ -107,7 +108,7 @@ limitations under the License.
     <string name="register_account_address">TODO</string>
     <string name="subscribe_account_address">TODO</string>
 
-    <string name="support_subject">Support</string>
+    <string name="support_subject">Support: </string>
     <string name="support_email">support@aletheiaware.com</string>
 
     <string name="title_activity_access">Access</string>
