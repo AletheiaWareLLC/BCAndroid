@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aletheiaware.bc.android.R;
+import com.aletheiaware.bc.android.utils.CopyToClipboardListener;
 
 public abstract class ExportKeysDialog {
 
@@ -38,14 +39,16 @@ public abstract class ExportKeysDialog {
     }
 
     public void create() {
-        View accessView = View.inflate(activity, R.layout.dialog_export, null);
-        final TextView aliasText = accessView.findViewById(R.id.export_alias_text);
+        View exportView = View.inflate(activity, R.layout.dialog_export, null);
+        final TextView aliasText = exportView.findViewById(R.id.export_alias_text);
+        aliasText.setOnClickListener(new CopyToClipboardListener(aliasText, "Alias"));
         aliasText.setText(alias);
-        final TextView accessCodeText = accessView.findViewById(R.id.export_access_code_text);
+        final TextView accessCodeText = exportView.findViewById(R.id.export_access_code_text);
+        accessCodeText.setOnClickListener(new CopyToClipboardListener(accessCodeText, "Access Code"));
         accessCodeText.setText(accessCode);
         AlertDialog.Builder ab = new AlertDialog.Builder(activity, R.style.AlertDialogTheme);
         ab.setTitle(R.string.export_keys);
-        ab.setView(accessView);
+        ab.setView(exportView);
         ab.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {

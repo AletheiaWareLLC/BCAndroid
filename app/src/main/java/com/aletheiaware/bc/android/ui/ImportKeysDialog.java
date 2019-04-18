@@ -34,15 +34,15 @@ public abstract class ImportKeysDialog {
     }
 
     public void create() {
-        View accessView = View.inflate(activity, R.layout.dialog_import, null);
-        final EditText aliasText = accessView.findViewById(R.id.import_alias_text);
+        View importView = View.inflate(activity, R.layout.dialog_import, null);
+        final EditText aliasText = importView.findViewById(R.id.import_alias_text);
         aliasText.setFocusable(true);
         aliasText.setFocusableInTouchMode(true);
-        final EditText accessCodeText = accessView.findViewById(R.id.import_access_code_text);
+        final EditText accessCodeText = importView.findViewById(R.id.import_access_code_text);
         accessCodeText.setFocusableInTouchMode(true);
         AlertDialog.Builder ab = new AlertDialog.Builder(activity, R.style.AlertDialogTheme);
         ab.setTitle(R.string.import_keys);
-        ab.setView(accessView);
+        ab.setView(importView);
         ab.setPositiveButton(R.string.import_keys_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {

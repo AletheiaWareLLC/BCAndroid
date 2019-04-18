@@ -32,7 +32,7 @@ limitations under the License.
         android:layout_margin="@dimen/view_margin"
         android:background="@android:color/transparent"
         android:contentDescription="@string/app_logo"
-        android:tint="@color/text_primary"
+        android:tint="@color/primary"
         app:srcCompat="@drawable/app_logo" />
 
     <View
@@ -103,7 +103,6 @@ limitations under the License.
         android:layout_margin="@dimen/view_margin"
         android:background="@android:color/transparent"
         android:contentDescription="@string/aletheia_ware_llc_logo"
-        android:tint="@color/text_primary"
         app:srcCompat="@drawable/aletheia_ware_llc_logo" />
 
 </LinearLayout>
