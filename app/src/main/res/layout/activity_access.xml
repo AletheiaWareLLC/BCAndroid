@@ -32,7 +32,6 @@ limitations under the License.
         android:layout_margin="@dimen/view_margin"
         android:background="@android:color/transparent"
         android:contentDescription="@string/app_logo"
-        android:tint="@color/primary"
         app:srcCompat="@drawable/app_logo" />
 
     <View
@@ -71,7 +70,7 @@ limitations under the License.
             android:layout_gravity="center"
             android:layout_margin="@dimen/view_margin"
             android:background="@color/accent"
-            android:padding="10dp"
+            android:padding="@dimen/view_padding"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size"
             android:text="@string/create_account" />
@@ -83,7 +82,7 @@ limitations under the License.
             android:layout_gravity="center"
             android:layout_margin="@dimen/view_margin"
             android:background="@color/accent"
-            android:padding="10dp"
+            android:padding="@dimen/view_padding"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size"
             android:text="@string/import_keys" />

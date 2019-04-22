@@ -145,9 +145,9 @@ public class AccessActivity extends AppCompatActivity {
 
                 @Override
                 public void deleteKeys(final String alias) {
-                    BCAndroidUtils.showDeleteKeysDialog(AccessActivity.this, new DialogInterface.OnClickListener() {
+                    new DeleteKeysDialog(AccessActivity.this) {
                         @Override
-                        public void onClick(DialogInterface dialog, int id) {
+                        public void onDelete(DialogInterface dialog) {
                             if (BCUtils.deleteRSAKeyPair(getFilesDir(), alias)) {
                                 removeAlias(alias);
                                 notifyDataSetChanged();
@@ -155,7 +155,7 @@ public class AccessActivity extends AppCompatActivity {
                                 showKeysList();
                             }
                         }
-                    });
+                    }.create();
                 }
             };
             unlockKeysRecycler.setAdapter(adapter);

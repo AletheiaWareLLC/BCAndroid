@@ -16,13 +16,16 @@
 
 package com.aletheiaware.bc.android.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.WorkerThread;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
@@ -84,9 +87,14 @@ public class BCAndroidUtils {
         return node;
     }
 
+    public static String getBCHostname() {
+        return BuildConfig.DEBUG ? BCUtils.BC_HOST_TEST : BCUtils.BC_HOST;
+    }
+
+    @WorkerThread
     public static InetAddress getBCHost() {
         try {
-            return InetAddress.getByName(BuildConfig.DEBUG ? BCUtils.BC_HOST_TEST : BCUtils.BC_HOST);
+            return InetAddress.getByName(getBCHostname());
         } catch (Exception e) {
             /* Ignored */
             e.printStackTrace();
@@ -95,20 +103,60 @@ public class BCAndroidUtils {
     }
 
     public static String getBCWebsite() {
-        return BuildConfig.DEBUG ? BCUtils.BC_WEBSITE_TEST : BCUtils.BC_WEBSITE;
+        return "https://" + getBCHostname();
     }
 
-    public static void showDeleteKeysDialog(final Activity parent, final DialogInterface.OnClickListener listener) {
-        parent.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AlertDialog.Builder ab = new AlertDialog.Builder(parent, R.style.AlertDialogTheme);
-                ab.setTitle(R.string.delete_keys);
-                ab.setMessage(R.string.delete_keys_legalese);
-                ab.setPositiveButton(R.string.delete_keys_action, listener);
-                ab.show();
+    private static long calculateSize(File file) {
+        if (file.isDirectory()) {
+            long sum = 0L;
+            for (File f : file.listFiles()) {
+                sum += calculateSize(f);
             }
-        });
+            return sum;
+        }
+        return file.length();
+    }
+
+    private static boolean recursiveDelete(File file) {
+        if (file.isDirectory()) {
+            for (File f : file.listFiles()) {
+                if (!recursiveDelete(f)) {
+                    return false;
+                }
+            }
+        } else {
+            return file.delete();
+        }
+        return true;
+    }
+
+    public static long getCacheSize(Context context) {
+        if (context != null) {
+            File cache = context.getCacheDir();
+            if (cache != null) {
+                return calculateSize(cache);
+            }
+        }
+        return 0L;
+    }
+
+    public static boolean purgeCache(Context context) {
+        if (context != null) {
+            File cache = context.getCacheDir();
+            if (cache != null) {
+                return recursiveDelete(cache);
+            }
+        }
+        return false;
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public static void setPreference(Context context, String key, String value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
+    }
+
+    public static String getPreference(Context context, String key, String defaultValue) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, defaultValue);
     }
 
     public static boolean isCustomer(File cache) throws IOException {

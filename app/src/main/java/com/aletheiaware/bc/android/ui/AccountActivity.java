@@ -134,16 +134,16 @@ public class AccountActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BCAndroidUtils.showDeleteKeysDialog(AccountActivity.this, new DialogInterface.OnClickListener() {
+                new DeleteKeysDialog(AccountActivity.this) {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onDelete(DialogInterface dialog) {
                         if (BCUtils.deleteRSAKeyPair(getFilesDir(), BCAndroidUtils.getAlias())) {
                             dialog.dismiss();
                             setResult(RESULT_OK);
                             finish();
                         }
                     }
-                });
+                }.create();
             }
         });
     }

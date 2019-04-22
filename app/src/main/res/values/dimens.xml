@@ -16,7 +16,8 @@ limitations under the License.
 -->
 <resources>
     <dimen name="activity_padding">12dp</dimen>
-    <dimen name="view_margin">8dp</dimen>
+    <dimen name="view_margin">4dp</dimen>
+    <dimen name="view_padding">8dp</dimen>
     <dimen name="text_primary_size">20sp</dimen>
     <dimen name="text_secondary_size">16sp</dimen>
 </resources>
