@@ -29,6 +29,7 @@ import android.security.keystore.KeyProperties;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 
+import com.aletheiaware.bc.Crypto;
 import com.aletheiaware.bc.android.R;
 import com.aletheiaware.bc.utils.BCUtils;
 
@@ -109,7 +110,7 @@ public class BiometricUtils {
         SecretKey key = keyGenerator.generateKey();
 
         // Create AES Cipher
-        Cipher cipher = Cipher.getInstance(BCUtils.AES_CIPHER);
+        Cipher cipher = Cipher.getInstance(Crypto.AES_CIPHER);
         cipher.init(Cipher.ENCRYPT_MODE, key);
 
         // Create cancellation signal

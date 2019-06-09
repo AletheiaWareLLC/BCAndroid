@@ -29,6 +29,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.aletheiaware.bc.BCProto.KeyShare;
+import com.aletheiaware.bc.Cache;
+import com.aletheiaware.bc.Crypto;
+import com.aletheiaware.bc.FileCache;
 import com.aletheiaware.bc.android.KeysAdapter;
 import com.aletheiaware.bc.android.R;
 import com.aletheiaware.bc.android.utils.BCAndroidUtils;
@@ -50,12 +53,17 @@ import javax.crypto.NoSuchPaddingException;
 
 public class AccessActivity extends AppCompatActivity {
 
+    private Cache cache;
+
     private RecyclerView unlockKeysRecycler;
     private View unlockKeysSeparator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        cache = new FileCache(getCacheDir());
+
         setContentView(R.layout.activity_access);
 
         unlockKeysRecycler = findViewById(R.id.access_unlock_keys_recycler);
@@ -73,9 +81,8 @@ public class AccessActivity extends AppCompatActivity {
                             public void run() {
                                 // Use access code to import key
                                 try {
-                                    final String website = BCAndroidUtils.getBCWebsite();
-                                    KeyShare ks = BCUtils.getKeyShare(website, alias);
-                                    BCUtils.importRSAKeyPair(getFilesDir(), accessCode, ks);
+                                    KeyShare ks = Crypto.getKeyShare(BCAndroidUtils.getBCWebsite(), alias);
+                                    Crypto.importRSAKeyPair(getFilesDir(), accessCode, ks);
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -97,8 +104,8 @@ public class AccessActivity extends AppCompatActivity {
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new CreateAccountDialog(AccessActivity.this) {
-                }.create();
+                Intent intent = new Intent(getString(R.string.action_create_account));
+                startActivity(intent);
             }
         });
         ImageButton logoButton = findViewById(R.id.aletheia_ware_llc_logo);
@@ -124,7 +131,7 @@ public class AccessActivity extends AppCompatActivity {
 
     private void showKeysList() {
         // A key exists, show unlock option
-        final List<String> ks = BCUtils.listRSAKeyPairs(getFilesDir());
+        final List<String> ks = Crypto.listRSAKeyPairs(getFilesDir());
         Log.d(BCUtils.TAG, "Keys: " + ks);
         if (ks.isEmpty()) {
             unlockKeysRecycler.setVisibility(View.GONE);
@@ -148,7 +155,7 @@ public class AccessActivity extends AppCompatActivity {
                     new DeleteKeysDialog(AccessActivity.this) {
                         @Override
                         public void onDelete(DialogInterface dialog) {
-                            if (BCUtils.deleteRSAKeyPair(getFilesDir(), alias)) {
+                            if (Crypto.deleteRSAKeyPair(getFilesDir(), alias)) {
                                 removeAlias(alias);
                                 notifyDataSetChanged();
                                 dialog.dismiss();
@@ -203,17 +210,22 @@ public class AccessActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    private void unlock(String alias, char[] password) throws BadPaddingException, IOException, IllegalBlockSizeException, InvalidAlgorithmParameterException, InvalidKeyException, InvalidKeySpecException, InvalidParameterSpecException, NoSuchAlgorithmException, NoSuchPaddingException {
+    private void unlock(final String alias, final char[] password) throws BadPaddingException, IOException, IllegalBlockSizeException, InvalidAlgorithmParameterException, InvalidKeyException, InvalidKeySpecException, InvalidParameterSpecException, NoSuchAlgorithmException, NoSuchPaddingException {
         // Use password to decrypt key
-        KeyPair keyPair = BCUtils.getRSAKeyPair(getFilesDir(), alias, password);
-        BCAndroidUtils.initialize(alias, keyPair);
-        // Unlock successful, exit
-        runOnUiThread(new Runnable() {
+        final KeyPair keyPair = Crypto.getRSAKeyPair(getFilesDir(), alias, password);
+        new Thread() {
             @Override
             public void run() {
-                setResult(RESULT_OK);
-                finish();
+                BCAndroidUtils.initialize(alias, keyPair, cache);
+                // Unlock successful, exit
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                });
             }
-        });
+        }.start();
     }
 }

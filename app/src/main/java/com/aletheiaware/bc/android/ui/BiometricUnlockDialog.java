@@ -22,7 +22,7 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.os.Build;
 import android.os.CancellationSignal;
 
-import com.aletheiaware.bc.utils.BCUtils;
+import com.aletheiaware.bc.Crypto;
 import com.aletheiaware.bc.android.utils.BiometricCallback;
 import com.aletheiaware.bc.android.utils.BiometricUtils;
 
@@ -55,8 +55,8 @@ public abstract class BiometricUnlockDialog {
             File f = BiometricUtils.getBiometricFile(activity, alias);
             try (FileInputStream in = new FileInputStream(f)) {
                 // Read initialization vector
-                byte[] iv = new byte[BCUtils.AES_IV_SIZE_BYTES];
-                if (in.read(iv) != BCUtils.AES_IV_SIZE_BYTES) {
+                byte[] iv = new byte[Crypto.AES_IV_SIZE_BYTES];
+                if (in.read(iv) != Crypto.AES_IV_SIZE_BYTES) {
                     throw new Exception("Could not read IV");
                 }
 
@@ -67,10 +67,10 @@ public abstract class BiometricUnlockDialog {
                     throw new Exception("Could not read encrypted password");
                 }
 
-                GCMParameterSpec gcmSpec = new GCMParameterSpec(BCUtils.GCM_TAG_SIZE_BITS, iv);
+                GCMParameterSpec gcmSpec = new GCMParameterSpec(Crypto.GCM_TAG_SIZE_BITS, iv);
 
                 // Create AES cipher
-                Cipher cipher = Cipher.getInstance(BCUtils.AES_CIPHER);
+                Cipher cipher = Cipher.getInstance(Crypto.AES_CIPHER);
                 cipher.init(Cipher.DECRYPT_MODE, key, gcmSpec);
                 BiometricPrompt.CryptoObject crypto = new BiometricPrompt.CryptoObject(cipher);
                 CancellationSignal cancel = new CancellationSignal();

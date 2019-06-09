@@ -33,21 +33,10 @@ limitations under the License.
     <string name="account_register">Register Keys</string>
     <string name="account_subscribe">Subscribe Keys</string>
 
+    <string name="action_create_account">com.aletheiaware.bc.android.CREATE_ACCOUNT</string>
+
     <string name="billing_amount">Amount</string>
     <string name="billing_email">Email</string>
-
-    <string name="create_account">Create Account</string>
-    <string name="create_account_action">Create</string>
-    <string name="create_account_label">Create a new account</string>
-    <string name="create_account_alias">Alias</string>
-    <string name="create_account_email">Email</string>
-    <string name="create_account_new_password">New Password</string>
-    <string name="create_account_confirm_password">Confirm Password</string>
-    <string name="create_account_step_1">Step 1: Alias</string>
-    <string name="create_account_step_2">Step 2: Email</string>
-    <string name="create_account_step_3">Step 3: Password</string>
-    <string name="create_account_step_4">Step 4: Billing</string>
-    <string name="create_account_step_5">Step 5: Legal</string>
 
     <string name="delete_keys">Delete Keys</string>
     <string name="delete_keys_action">Delete</string>
@@ -72,9 +61,6 @@ limitations under the License.
     <string name="error_unlock_keys">Failed to unlock keys</string>
     <string name="error_biometric_unlock">Failed to unlock keys with biometric unlock</string>
     <string name="error_biometric_enroll">Failed to set up biometric unlock</string>
-    <string name="error_create_account">Failed to create account</string>
-    <string name="error_registering">Failed to register</string>
-    <string name="error_subscribing">Failed to subscribe</string>
 
     <string name="export_keys">Export Keys</string>
     <string name="export_keys_action">Export</string>
@@ -106,16 +92,12 @@ limitations under the License.
     <string name="unlock_keys_label">Unlock your keys by entering your password</string>
 
     <string name="stripe_publishable_key">TODO</string>
-    <string name="register_account_address">TODO</string>
-    <string name="subscribe_account_address">TODO</string>
 
     <string name="support_subject">Support: </string>
     <string name="support_email">support@aletheiaware.com</string>
 
     <string name="title_activity_access">Access</string>
     <string name="title_activity_account">Account</string>
-    <string name="title_dialog_create_account">Create Account</string>
-    <string name="title_dialog_creating_account">Creating Account</string>
     <string name="title_dialog_error">Error</string>
     <string name="title_dialog_stripe">Stripe</string>
 

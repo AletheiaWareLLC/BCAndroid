@@ -64,68 +64,6 @@ limitations under the License.
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:labelFor="@id/account_customer_text"
-            android:text="@string/account_customer"
-            android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_secondary_size" />
-
-        <TextView
-            android:id="@+id/account_customer_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:textAlignment="center"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size" />
-
-        <Button
-            android:id="@+id/account_register_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/view_margin"
-            android:background="@color/accent"
-            android:padding="@dimen/view_padding"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"
-            android:text="@string/account_register"
-            android:visibility="gone" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:labelFor="@id/account_subscription_text"
-            android:text="@string/account_subscription"
-            android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_secondary_size" />
-
-        <TextView
-            android:id="@+id/account_subscription_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:textAlignment="center"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size" />
-
-        <Button
-            android:id="@+id/account_subscribe_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/view_margin"
-            android:background="@color/accent"
-            android:padding="@dimen/view_padding"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"
-            android:text="@string/account_subscribe"
-            android:visibility="gone" />
-
         <Button
             android:id="@+id/account_export_button"
             android:layout_width="match_parent"

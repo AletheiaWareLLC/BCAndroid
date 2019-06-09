@@ -29,30 +29,20 @@ import android.support.annotation.WorkerThread;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.aletheiaware.bc.Cache;
 import com.aletheiaware.bc.android.BuildConfig;
 import com.aletheiaware.bc.android.R;
-
-import com.aletheiaware.bc.BC.Channel;
-import com.aletheiaware.bc.BC.Channel.RecordCallback;
-import com.aletheiaware.bc.BC.Node;
-import com.aletheiaware.bc.BCProto.Block;
-import com.aletheiaware.bc.BCProto.BlockEntry;
-import com.aletheiaware.bc.android.ui.StripeDialog;
 import com.aletheiaware.bc.utils.BCUtils;
-import com.aletheiaware.finance.FinanceProto.Customer;
-import com.aletheiaware.finance.utils.FinanceUtils;
-import com.google.protobuf.ByteString;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.stripe.android.model.Token;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.InetAddress;
 import java.security.KeyPair;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 
 public class BCAndroidUtils {
 
@@ -61,7 +51,7 @@ public class BCAndroidUtils {
 
     private static String alias = null;
     private static KeyPair keyPair = null;
-    private static Node node = null;
+    private static Cache cache = null;
 
     private BCAndroidUtils() {}
 
@@ -69,10 +59,10 @@ public class BCAndroidUtils {
         return alias != null && keyPair != null;
     }
 
-    public static void initialize(String alias, KeyPair keyPair) {
+    public static void initialize(String alias, KeyPair keyPair, Cache cache) {
         BCAndroidUtils.alias = alias;
         BCAndroidUtils.keyPair = keyPair;
-        node = new Node(alias, keyPair);
+        BCAndroidUtils.cache = cache;
     }
 
     public static String getAlias() {
@@ -83,8 +73,8 @@ public class BCAndroidUtils {
         return keyPair;
     }
 
-    public static Node getNode() {
-        return node;
+    public static Cache getCache() {
+        return cache;
     }
 
     public static String getBCHostname() {
@@ -106,6 +96,16 @@ public class BCAndroidUtils {
         return "https://" + getBCHostname();
     }
 
+    public static long getCacheSize(Context context) {
+        if (context != null) {
+            File cache = context.getCacheDir();
+            if (cache != null) {
+                return calculateSize(cache);
+            }
+        }
+        return 0L;
+    }
+
     private static long calculateSize(File file) {
         if (file.isDirectory()) {
             long sum = 0L;
@@ -115,6 +115,16 @@ public class BCAndroidUtils {
             return sum;
         }
         return file.length();
+    }
+
+    public static boolean purgeCache(Context context) {
+        if (context != null) {
+            File cache = context.getCacheDir();
+            if (cache != null) {
+                return recursiveDelete(cache);
+            }
+        }
+        return false;
     }
 
     private static boolean recursiveDelete(File file) {
@@ -130,26 +140,6 @@ public class BCAndroidUtils {
         return true;
     }
 
-    public static long getCacheSize(Context context) {
-        if (context != null) {
-            File cache = context.getCacheDir();
-            if (cache != null) {
-                return calculateSize(cache);
-            }
-        }
-        return 0L;
-    }
-
-    public static boolean purgeCache(Context context) {
-        if (context != null) {
-            File cache = context.getCacheDir();
-            if (cache != null) {
-                return recursiveDelete(cache);
-            }
-        }
-        return false;
-    }
-
     @SuppressLint("ApplySharedPref")
     public static void setPreference(Context context, String key, String value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
@@ -159,54 +149,13 @@ public class BCAndroidUtils {
         return PreferenceManager.getDefaultSharedPreferences(context).getString(key, defaultValue);
     }
 
-    public static boolean isCustomer(File cache) throws IOException {
-        final Channel customers = new Channel(FinanceUtils.CUSTOMER_CHANNEL, BCUtils.THRESHOLD_STANDARD, cache, getBCHost());
-        final String alias = BCAndroidUtils.getAlias();
-        final KeyPair keys = BCAndroidUtils.getKeyPair();
-        final Customer.Builder cb = Customer.newBuilder();
-        customers.read(alias, keys, null, new RecordCallback() {
-            @Override
-            public boolean onRecord(ByteString blockHash, Block block, BlockEntry blockEntry, byte[] key, byte[] payload) {
-                try {
-                    cb.mergeFrom(payload);
-                    return false;
-                } catch (InvalidProtocolBufferException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            }
-        });
-        final Customer customer = cb.build();
-        String customerId = customer.getCustomerId();
-        return customerId != null && !customerId.isEmpty();
+    @SuppressLint("ApplySharedPref")
+    public static void setPreferences(Context context, String key, Set<String> values) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putStringSet(key, values).commit();
     }
 
-    public interface RegistrationCallback {
-        void onRegistered(String customerId);
-    }
-
-    public static void registerCustomer(final Activity parent, final RegistrationCallback callback) {
-        parent.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                new StripeDialog(parent, null) {
-                    @Override
-                    public void onSubmit(String email, Token token) {
-                        String website = parent.getString(R.string.register_account_address);
-                        String alias = getAlias();
-                        String customerId = null;
-                        try {
-                            customerId = BCUtils.register(website, alias, email, token.getId());
-                        } catch (IOException e) {
-                            showErrorDialog(parent, R.string.error_registering, e);
-                        }
-                        if (customerId != null && !customerId.isEmpty()) {
-                            callback.onRegistered(customerId);
-                        }
-                    }
-                }.create();
-            }
-        });
+    public static Set<String> getPreferences(Context context, String key, Set<String> defaultValues) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getStringSet(key, defaultValues);
     }
 
     public static void showErrorDialog(final Activity parent, final int resource, final Exception exception) {

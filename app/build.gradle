@@ -24,7 +24,7 @@ dependencies {
     compileOnly files('libs/BCJava.jar')
     compileOnly files('libs/FinanceJava.jar')
     compileOnly files('libs/protobuf-lite-3.0.1.jar')
-    compileOnly 'com.stripe:stripe-android:6.1.2'
+    compileOnly 'com.stripe:stripe-android:9.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
