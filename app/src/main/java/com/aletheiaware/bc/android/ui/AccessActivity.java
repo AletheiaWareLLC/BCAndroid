@@ -213,19 +213,14 @@ public class AccessActivity extends AppCompatActivity {
     private void unlock(final String alias, final char[] password) throws BadPaddingException, IOException, IllegalBlockSizeException, InvalidAlgorithmParameterException, InvalidKeyException, InvalidKeySpecException, InvalidParameterSpecException, NoSuchAlgorithmException, NoSuchPaddingException {
         // Use password to decrypt key
         final KeyPair keyPair = Crypto.getRSAKeyPair(getFilesDir(), alias, password);
-        new Thread() {
+        BCAndroidUtils.initialize(alias, keyPair, cache);
+        // Unlock successful, exit
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                BCAndroidUtils.initialize(alias, keyPair, cache);
-                // Unlock successful, exit
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setResult(RESULT_OK);
-                        finish();
-                    }
-                });
+                setResult(RESULT_OK);
+                finish();
             }
-        }.start();
+        });
     }
 }

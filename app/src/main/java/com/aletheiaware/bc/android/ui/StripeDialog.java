@@ -36,16 +36,33 @@ import com.stripe.android.view.CardInputWidget;
 public abstract class StripeDialog {
 
     private final Activity activity;
+    private final String description;
     private final String amount;
     private AlertDialog dialog;
 
-    public StripeDialog(Activity activity, String amount) {
+    public StripeDialog(Activity activity, String description, String amount) {
         this.activity = activity;
+        this.description = description;
         this.amount = amount;
     }
 
     public void create() {
         View stripeView = View.inflate(activity, R.layout.dialog_stripe, null);
+        final CheckBox termsCheck = stripeView.findViewById(R.id.stripe_terms_of_service_check);
+        final CheckBox policyCheck = stripeView.findViewById(R.id.stripe_privacy_policy_check);
+        TextView legaleseBetaLabel = stripeView.findViewById(R.id.stripe_legalese_beta_label);
+        legaleseBetaLabel.setMovementMethod(LinkMovementMethod.getInstance());
+        final CheckBox betaCheck = stripeView.findViewById(R.id.stripe_beta_test_agreement_check);
+        TextView descriptionLabel = stripeView.findViewById(R.id.stripe_description_label);
+        TextView descriptionText = stripeView.findViewById(R.id.stripe_description_text);
+        if (description != null && !description.isEmpty()) {
+            descriptionLabel.setVisibility(View.VISIBLE);
+            descriptionText.setVisibility(View.VISIBLE);
+            descriptionText.setText(description);
+        } else {
+            descriptionLabel.setVisibility(View.GONE);
+            descriptionText.setVisibility(View.GONE);
+        }
         TextView amountLabel = stripeView.findViewById(R.id.stripe_amount_label);
         TextView amountText = stripeView.findViewById(R.id.stripe_amount_text);
         if (amount != null && !amount.isEmpty()) {
@@ -62,25 +79,12 @@ public abstract class StripeDialog {
         final CardInputWidget cardWidget = stripeView.findViewById(R.id.stripe_card_widget);
         TextView legaleseLabel = stripeView.findViewById(R.id.stripe_legalese_label);
         legaleseLabel.setMovementMethod(LinkMovementMethod.getInstance());
-        final CheckBox termsCheck = stripeView.findViewById(R.id.stripe_terms_of_service_check);
-        final CheckBox policyCheck = stripeView.findViewById(R.id.stripe_privacy_policy_check);
-        TextView legaleseBetaLabel = stripeView.findViewById(R.id.stripe_legalese_beta_label);
-        legaleseBetaLabel.setMovementMethod(LinkMovementMethod.getInstance());
-        final CheckBox betaCheck = stripeView.findViewById(R.id.stripe_beta_test_agreement_check);
         AlertDialog.Builder ab = new AlertDialog.Builder(activity, R.style.AlertDialogTheme);
         ab.setTitle(R.string.title_dialog_stripe);
         ab.setView(stripeView);
         ab.setPositiveButton(R.string.stripe_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                // Email
-                final String email = emailText.getText().toString();
-                // TODO ensure email is valid
-                if (email.isEmpty()) {
-                    BCAndroidUtils.showErrorDialog(activity, activity.getString(R.string.error_invalid_email));
-                    return;
-                }
-
                 // Legal
                 if (!termsCheck.isChecked()) {
                     BCAndroidUtils.showErrorDialog(activity, activity.getString(R.string.error_terms_of_service_required));
@@ -92,6 +96,14 @@ public abstract class StripeDialog {
                 }
                 if (!betaCheck.isChecked()) {
                     BCAndroidUtils.showErrorDialog(activity, activity.getString(R.string.error_beta_test_agreement_required));
+                    return;
+                }
+
+                // Email
+                final String email = emailText.getText().toString();
+                // TODO ensure email is valid
+                if (email.isEmpty()) {
+                    BCAndroidUtils.showErrorDialog(activity, activity.getString(R.string.error_invalid_email));
                     return;
                 }
 

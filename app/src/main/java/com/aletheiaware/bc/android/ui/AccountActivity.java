@@ -67,6 +67,7 @@ public class AccountActivity extends AppCompatActivity {
         publicKeyText = findViewById(R.id.account_public_key_text);
         publicKeyText.setOnClickListener(new CopyToClipboardListener(publicKeyText, "Public Key"));
         // TODO add button to backup keys, either by printing, or emailing.
+        // TODO add button to manage payment sources
         exportButton = findViewById(R.id.account_export_button);
         exportButton.setOnClickListener(new View.OnClickListener() {
             @Override

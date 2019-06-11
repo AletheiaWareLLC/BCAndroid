@@ -27,50 +27,6 @@ limitations under the License.
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:id="@+id/stripe_amount_label"
-            android:labelFor="@id/stripe_amount_text"
-            android:text="@string/billing_amount"
-            android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_secondary_size" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:id="@+id/stripe_amount_text"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:labelFor="@id/stripe_email_text"
-            android:text="@string/billing_email"
-            android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_secondary_size" />
-
-        <EditText
-            android:id="@+id/stripe_email_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:gravity="center"
-            android:imeOptions="actionDone"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size" />
-
-        <com.stripe.android.view.CardInputWidget
-            android:id="@+id/stripe_card_widget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin" />
-
-        <TextView
             android:id="@+id/stripe_legalese_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,6 +70,68 @@ limitations under the License.
             android:text="@string/legalese_beta_test_agreement"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin"
+            android:id="@+id/stripe_description_label"
+            android:labelFor="@id/stripe_description_text"
+            android:text="@string/stripe_description"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_secondary_size" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin"
+            android:id="@+id/stripe_description_text"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_primary_size" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin"
+            android:id="@+id/stripe_amount_label"
+            android:labelFor="@id/stripe_amount_text"
+            android:text="@string/stripe_amount"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_secondary_size" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin"
+            android:id="@+id/stripe_amount_text"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_primary_size" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin"
+            android:labelFor="@id/stripe_email_text"
+            android:text="@string/stripe_email"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_secondary_size" />
+
+        <EditText
+            android:id="@+id/stripe_email_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_primary_size" />
+
+        <com.stripe.android.view.CardInputWidget
+            android:id="@+id/stripe_card_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/view_margin" />
 
     </LinearLayout>
 

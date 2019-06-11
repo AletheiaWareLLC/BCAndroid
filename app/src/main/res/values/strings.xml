@@ -35,9 +35,6 @@ limitations under the License.
 
     <string name="action_create_account">com.aletheiaware.bc.android.CREATE_ACCOUNT</string>
 
-    <string name="billing_amount">Amount</string>
-    <string name="billing_email">Email</string>
-
     <string name="delete_keys">Delete Keys</string>
     <string name="delete_keys_action">Delete</string>
     <string name="delete_keys_legalese">Deleting your keys from this device will not delete your data from the blockchain, however it will remove this device\'s access to that data. Once deleted, keys are not recoverable.</string>
@@ -81,6 +78,10 @@ limitations under the License.
     <string name="legalese_beta_test_agreement">I understand, and agree to the Beta Test Agreement</string>
 
     <string name="stripe_action">Submit</string>
+    <string name="stripe_amount">Amount</string>
+    <string name="stripe_description">Description</string>
+    <string name="stripe_email">Email</string>
+    <string name="stripe_publishable_key">TODO</string>
 
     <string name="switch_keys">Switch Keys</string>
     <string name="switch_keys_action">Switch</string>
@@ -90,8 +91,6 @@ limitations under the License.
     <string name="unlock_keys_alias">Alias</string>
     <string name="unlock_keys_password">Password</string>
     <string name="unlock_keys_label">Unlock your keys by entering your password</string>
-
-    <string name="stripe_publishable_key">TODO</string>
 
     <string name="support_subject">Support: </string>
     <string name="support_email">support@aletheiaware.com</string>
