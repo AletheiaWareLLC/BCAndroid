@@ -130,6 +130,7 @@ public abstract class StripeDialog {
             }
         });
         dialog = ab.show();
+        termsCheck.requestFocus();
     }
 
     public AlertDialog getDialog() {

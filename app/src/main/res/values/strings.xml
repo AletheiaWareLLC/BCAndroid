@@ -81,7 +81,11 @@ limitations under the License.
     <string name="stripe_amount">Amount</string>
     <string name="stripe_description">Description</string>
     <string name="stripe_email">Email</string>
+    <string name="stripe_payment_method">Payment Method</string>
     <string name="stripe_publishable_key">TODO</string>
+    <string name="stripe_step_1">Step 1: Legal</string>
+    <string name="stripe_step_2">Step 2: Contact Information</string>
+    <string name="stripe_step_3">Step 3: Payment Method</string>
 
     <string name="switch_keys">Switch Keys</string>
     <string name="switch_keys_action">Switch</string>
