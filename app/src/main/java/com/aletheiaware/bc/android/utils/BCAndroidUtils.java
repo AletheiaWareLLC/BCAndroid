@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -41,6 +42,7 @@ import java.net.InetAddress;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -159,6 +161,10 @@ public class BCAndroidUtils {
     }
 
     public static void showErrorDialog(final Activity parent, final int resource, final Exception exception) {
+        showErrorDialog(parent, parent.getString(resource), exception);
+    }
+
+    public static void showErrorDialog(final Activity parent, final String message, final Exception exception) {
         exception.printStackTrace();
         parent.runOnUiThread(new Runnable() {
             @Override
@@ -175,7 +181,7 @@ public class BCAndroidUtils {
                                 support(parent, sb);
                             }
                         })
-                        .setMessage(resource)
+                        .setMessage(message)
                         .show();
             }
         });
@@ -217,9 +223,18 @@ public class BCAndroidUtils {
         for (String key : map.keySet()) {
             content.append(key).append(":").append(map.get(key)).append("\n");
         }
-        content.append("======== App Info ========\n");
-        content.append("Build: ").append(BuildConfig.BUILD_TYPE).append("\n");
-        content.append("App ID: ").append(BuildConfig.APPLICATION_ID).append("\n");
+        try {
+            PackageInfo info = parent.getPackageManager().getPackageInfo(parent.getPackageName(), 0);
+            content.append("======== App Info ========\n");
+            content.append("App ID: ").append(info.packageName).append("\n");
+            content.append("Version: ").append(info.versionName).append("\n");
+            content.append("Installed: ").append(BCUtils.FORMATTER.format(new Date(info.firstInstallTime))).append("\n");
+            content.append("Updated: ").append(BCUtils.FORMATTER.format(new Date(info.lastUpdateTime))).append("\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        content.append("======== Library Info ========\n");
+        content.append("Library ID: ").append(BuildConfig.APPLICATION_ID).append("\n");
         content.append("Version: ").append(BuildConfig.VERSION_NAME).append("\n");
         content.append("======== Device Info ========\n");
         content.append("Board: ").append(Build.BOARD).append("\n");
