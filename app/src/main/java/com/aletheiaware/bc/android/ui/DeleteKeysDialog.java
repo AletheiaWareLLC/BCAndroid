@@ -33,7 +33,7 @@ public abstract class DeleteKeysDialog {
     }
 
     public void create() {
-        View deleteView = View.inflate(activity, R.layout.dialog_delete, null);
+        View deleteView = View.inflate(activity, R.layout.dialog_delete_keys, null);
         AlertDialog.Builder ab = new AlertDialog.Builder(activity, R.style.AlertDialogTheme);
         ab.setTitle(R.string.delete_keys);
         ab.setView(deleteView);
