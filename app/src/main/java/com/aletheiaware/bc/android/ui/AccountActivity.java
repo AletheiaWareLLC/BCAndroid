@@ -119,6 +119,7 @@ public class AccountActivity extends AppCompatActivity {
                     public void onDelete(DialogInterface dialog) {
                         if (Crypto.deleteRSAKeyPair(getFilesDir(), BCAndroidUtils.getAlias())) {
                             dialog.dismiss();
+                            BCAndroidUtils.initialize(null, null, null);
                             setResult(RESULT_OK);
                             finish();
                         }
