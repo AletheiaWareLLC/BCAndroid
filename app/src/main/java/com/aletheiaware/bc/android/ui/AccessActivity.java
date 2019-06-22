@@ -104,7 +104,7 @@ public class AccessActivity extends AppCompatActivity {
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getString(R.string.action_create_account));
+                Intent intent = new Intent(AccessActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
             }
         });

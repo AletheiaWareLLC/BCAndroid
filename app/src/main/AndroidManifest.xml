@@ -38,6 +38,9 @@ limitations under the License.
             android:name=".ui.AccountActivity"
             android:label="@string/title_activity_account"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.CreateAccountActivity"
+            android:label="@string/title_activity_create_account"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

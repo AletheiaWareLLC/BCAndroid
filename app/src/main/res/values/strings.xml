@@ -33,7 +33,15 @@ limitations under the License.
     <string name="account_register">Register Keys</string>
     <string name="account_subscribe">Subscribe Keys</string>
 
-    <string name="action_create_account">com.aletheiaware.bc.android.CREATE_ACCOUNT</string>
+    <string name="create_account">Create Account</string>
+    <string name="create_account_action">Create</string>
+    <string name="create_account_label">Create a new account</string>
+    <string name="create_account_choose_alias">Choose Alias</string>
+    <string name="create_account_choose_password">Choose Password</string>
+    <string name="create_account_confirm_password">Confirm Password</string>
+    <string name="create_account_step_1">Step 1: Legal</string>
+    <string name="create_account_step_2">Step 2: Alias</string>
+    <string name="create_account_step_3">Step 3: Password</string>
 
     <string name="delete_keys">Delete Keys</string>
     <string name="delete_keys_action">Delete</string>
@@ -42,6 +50,7 @@ limitations under the License.
     <string name="error_report">Report</string>
     <string name="error_alias_invalid">Invalid alias</string>
     <string name="error_alias_taken">Alias already registered</string>
+    <string name="error_create_account">Failed to create account</string>
     <string name="error_email_invalid">Invalid email</string>
     <string name="error_export_key_pair">Failed to export keys</string>
     <string name="error_import_key_pair">Failed to import keys</string>
@@ -101,6 +110,8 @@ limitations under the License.
 
     <string name="title_activity_access">Access</string>
     <string name="title_activity_account">Account</string>
+    <string name="title_activity_create_account">Create Account</string>
+    <string name="title_dialog_creating_account">Creating Account</string>
     <string name="title_dialog_error">Error</string>
     <string name="title_dialog_stripe">Stripe</string>
 
