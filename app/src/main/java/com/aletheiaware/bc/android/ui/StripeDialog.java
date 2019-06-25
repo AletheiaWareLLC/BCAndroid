@@ -18,6 +18,7 @@ package com.aletheiaware.bc.android.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -113,16 +114,15 @@ public abstract class StripeDialog {
 
                 Card card = cardWidget.getCard();
                 if (card != null) {
-                    card.setName(email);
                     Stripe stripe = new Stripe(activity, activity.getString(R.string.stripe_publishable_key));
                     stripe.createToken(card, new TokenCallback() {
                         @Override
-                        public void onError(Exception error) {
+                        public void onError(@NonNull Exception error) {
                             BCAndroidUtils.showErrorDialog(activity, R.string.error_stripe_invalid_payment, error);
                         }
 
                         @Override
-                        public void onSuccess(Token token) {
+                        public void onSuccess(@NonNull Token token) {
                             onSubmit(email, token);
                         }
                     });

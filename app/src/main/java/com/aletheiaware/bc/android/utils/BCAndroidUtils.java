@@ -23,12 +23,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.WorkerThread;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
 
 import com.aletheiaware.bc.Cache;
 import com.aletheiaware.bc.android.BuildConfig;
@@ -36,6 +39,8 @@ import com.aletheiaware.bc.android.R;
 import com.aletheiaware.bc.utils.BCUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.InetAddress;
@@ -160,6 +165,36 @@ public class BCAndroidUtils {
         return PreferenceManager.getDefaultSharedPreferences(context).getStringSet(key, defaultValues);
     }
 
+    public static void captureScreenshot(View view, String name) {
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache(true);
+        Bitmap cache = view.getDrawingCache();
+        if (cache == null) {
+            Log.e(BCUtils.TAG, "Drawing cache null");
+            return;
+        }
+        Bitmap bitmap = Bitmap.createBitmap(cache);
+        view.setDrawingCacheEnabled(false);
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File file = new File(dir, name);
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (out != null) {
+                try {
+                    out.flush();
+                    out.close();
+                } catch (IOException e) {
+                    /* Ignored */
+                }
+            }
+        }
+    }
+
     public static void showErrorDialog(final Activity parent, final int resource, final Exception exception) {
         showErrorDialog(parent, parent.getString(resource), exception);
     }
@@ -235,6 +270,7 @@ public class BCAndroidUtils {
         }
         content.append("======== Library Info ========\n");
         content.append("Library ID: ").append(BuildConfig.APPLICATION_ID).append("\n");
+        content.append("Variant: ").append(BuildConfig.BUILD_TYPE).append("\n");
         content.append("Version: ").append(BuildConfig.VERSION_NAME).append("\n");
         content.append("======== Device Info ========\n");
         content.append("Board: ").append(Build.BOARD).append("\n");
@@ -249,12 +285,7 @@ public class BCAndroidUtils {
         content.append("Manufacturer: ").append(Build.MANUFACTURER).append("\n");
         content.append("Model: ").append(Build.MODEL).append("\n");
         content.append("Product: ").append(Build.PRODUCT).append("\n");
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            content.append("CPU ABI: ").append(Build.CPU_ABI).append("\n");
-            content.append("CPU ABI2: ").append(Build.CPU_ABI2).append("\n");
-        } else {
-            content.append("Supported ABIs: ").append(Arrays.toString(Build.SUPPORTED_ABIS)).append("\n");
-        }
+        content.append("Supported ABIs: ").append(Arrays.toString(Build.SUPPORTED_ABIS)).append("\n");
         content.append("Tags: ").append(Build.TAGS).append("\n");
         content.append("Type: ").append(Build.TYPE).append("\n");
         content.append("User: ").append(Build.USER).append("\n");

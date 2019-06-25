@@ -182,13 +182,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             return;
         }
 
-        View progressView = View.inflate(CreateAccountActivity.this, R.layout.dialog_progress, null);
-        progressBar = progressView.findViewById(R.id.progress);
-        progressDialog = new AlertDialog.Builder(CreateAccountActivity.this, R.style.AlertDialogTheme)
-                .setTitle(R.string.title_dialog_creating_account)
-                .setCancelable(false)
-                .setView(progressBar)
-                .show();
         new Thread() {
             @Override
             public void run() {
@@ -201,6 +194,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                     e.printStackTrace();
                     return;
                 }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        View progressView = View.inflate(CreateAccountActivity.this, R.layout.dialog_progress, null);
+                        progressBar = progressView.findViewById(R.id.progress);
+                        progressDialog = new AlertDialog.Builder(CreateAccountActivity.this, R.style.AlertDialogTheme)
+                                .setTitle(R.string.title_dialog_creating_account)
+                                .setCancelable(false)
+                                .setView(progressBar)
+                                .show();
+                    }
+                });
                 try {
                     // TODO mine terms of service agreement into blockchain
                     setProgressBar(1);
@@ -237,7 +242,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressBar.setProgress(v);
+                if (progressBar != null) {
+                    progressBar.setProgress(v);
+                }
             }
         });
     }
