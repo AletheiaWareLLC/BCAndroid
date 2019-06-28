@@ -50,6 +50,7 @@ limitations under the License.
     <string name="error_report">Report</string>
     <string name="error_alias_invalid">Invalid alias</string>
     <string name="error_alias_taken">Alias already registered</string>
+    <string name="error_alias_too_long">Alias too long: %d max: %d</string>
     <string name="error_create_account">Failed to create account</string>
     <string name="error_email_invalid">Invalid email</string>
     <string name="error_export_key_pair">Failed to export keys</string>

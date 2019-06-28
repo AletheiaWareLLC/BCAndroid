@@ -7,7 +7,8 @@ This is an Android implementation of a blockchain using the BC data structures.
 
 Setup
 =====
-Libraries
+
+JAR Libraries
 
     mkdir app/libs
     ln -s <bcjavalib> app/libs/BCJava.jar

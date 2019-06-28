@@ -104,10 +104,17 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 final String alias = s.toString();
+                long length = alias.length();
+                if (length > AliasUtils.MAX_ALIAS_LENGTH) {
+                    aliasText.setError(getString(R.string.error_alias_too_long, length, AliasUtils.MAX_ALIAS_LENGTH));
+                } else {
+                    aliasText.setError(null);
+                }
                 new Thread() {
                     @Override
                     public void run() {
                         try {
+                            // TODO this is inefficient, instead iterate alias channel once and generate a set of registered aliases
                             final boolean unique = AliasUtils.isUnique(cache, network, alias);
                             runOnUiThread(new Runnable() {
                                 @Override

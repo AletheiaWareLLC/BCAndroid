@@ -85,7 +85,7 @@ public class BCAndroidUtils {
     }
 
     public static String getBCHostname() {
-        return BuildConfig.DEBUG ? BCUtils.BC_HOST_TEST : BCUtils.BC_HOST;
+        return BCUtils.getBCHostname(BuildConfig.DEBUG);
     }
 
     @WorkerThread
