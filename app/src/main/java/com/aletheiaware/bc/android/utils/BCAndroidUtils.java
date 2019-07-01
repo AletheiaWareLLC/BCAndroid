@@ -50,6 +50,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 public class BCAndroidUtils {
 
@@ -165,33 +166,46 @@ public class BCAndroidUtils {
         return PreferenceManager.getDefaultSharedPreferences(context).getStringSet(key, defaultValues);
     }
 
-    public static void captureScreenshot(View view, String name) {
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache(true);
-        Bitmap cache = view.getDrawingCache();
-        if (cache == null) {
-            Log.e(BCUtils.TAG, "Drawing cache null");
-            return;
-        }
-        Bitmap bitmap = Bitmap.createBitmap(cache);
-        view.setDrawingCacheEnabled(false);
-        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File file = new File(dir, name);
-        FileOutputStream out = null;
-        try {
-            out = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (out != null) {
+    public static void captureScreenshot(final Activity parent, final String name) {
+        final CountDownLatch latch = new CountDownLatch(1);
+        parent.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                View view = parent.getWindow().getDecorView().getRootView();
+                view.setDrawingCacheEnabled(true);
+                view.buildDrawingCache(true);
+                Bitmap cache = view.getDrawingCache();
+                if (cache == null) {
+                    Log.e(BCUtils.TAG, "Drawing cache null");
+                    return;
+                }
+                Bitmap bitmap = Bitmap.createBitmap(cache);
+                view.setDrawingCacheEnabled(false);
+                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                File file = new File(dir, name);
+                FileOutputStream out = null;
                 try {
-                    out.flush();
-                    out.close();
+                    out = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
                 } catch (IOException e) {
-                    /* Ignored */
+                    e.printStackTrace();
+                } finally {
+                    if (out != null) {
+                        try {
+                            out.flush();
+                            out.close();
+                        } catch (IOException e) {
+                            /* Ignored */
+                        }
+                    }
+                    latch.countDown();
                 }
             }
+        });
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
