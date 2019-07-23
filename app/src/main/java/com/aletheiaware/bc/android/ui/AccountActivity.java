@@ -33,6 +33,7 @@ import com.aletheiaware.bc.android.R;
 import com.aletheiaware.bc.android.utils.BCAndroidUtils;
 import com.aletheiaware.bc.android.utils.CopyToClipboardListener;
 import com.aletheiaware.bc.utils.BCUtils;
+import com.aletheiaware.common.android.utils.CommonAndroidUtils;
 import com.aletheiaware.finance.utils.FinanceUtils;
 import com.stripe.android.model.Token;
 
@@ -93,7 +94,7 @@ public class AccountActivity extends AppCompatActivity {
                                         }
                                     });
                                 } catch (BadPaddingException | IOException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException e) {
-                                    BCAndroidUtils.showErrorDialog(AccountActivity.this, R.string.error_export_key_pair, e);
+                                    CommonAndroidUtils.showErrorDialog(AccountActivity.this, R.style.AlertDialogTheme, R.string.error_export_key_pair, e);
                                 }
                             }
                         }.start();

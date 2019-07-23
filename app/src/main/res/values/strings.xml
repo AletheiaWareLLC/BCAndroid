@@ -18,7 +18,6 @@ limitations under the License.
 
     <string name="app_name">App Name</string>
     <string name="app_logo">App Logo</string>
-    <string name="aletheia_ware_llc_logo">Aletheia Ware LLC Logo</string>
 
     <string name="access_create_account_label">Create Account</string>
     <string name="access_biometric_unlock_title">Biometric Unlock</string>
@@ -47,7 +46,6 @@ limitations under the License.
     <string name="delete_keys_action">Delete</string>
     <string name="delete_keys_legalese">Deleting your keys from this device will not delete your data from the blockchain, however it will remove this device\'s access to that data. Once deleted, keys are not recoverable.</string>
 
-    <string name="error_report">Report</string>
     <string name="error_alias_invalid">Invalid alias</string>
     <string name="error_alias_taken">Alias already registered</string>
     <string name="error_alias_too_long">Alias too long: %d max: %d</string>
@@ -62,9 +60,6 @@ limitations under the License.
     <string name="error_read_alias_failed">Could not read Alias blockchain</string>
     <string name="error_read_finance_failed">Could not read Finance blockchain</string>
     <string name="error_stripe_invalid_payment">Invalid payment information</string>
-    <string name="error_terms_of_service_required">You must read, understand, and agree to the Terms of Service</string>
-    <string name="error_privacy_policy_required">You must read, understand, and agree to the Privacy Policy</string>
-    <string name="error_beta_test_agreement_required">You must read, understand, and agree to the Beta Test Agreement</string>
     <string name="error_unlock_keys">Failed to unlock keys</string>
     <string name="error_biometric_unlock">Failed to unlock keys with biometric unlock</string>
     <string name="error_biometric_enroll">Failed to set up biometric unlock</string>
@@ -80,12 +75,6 @@ limitations under the License.
     <string name="import_keys_alias">Alias</string>
     <string name="import_keys_access_code">Access Code</string>
     <string name="import_keys_label">Import your keys from another device.</string>
-
-    <string name="legalese_label">BC is made available by <a href="https://aletheiaware.com">Aletheia Ware LLC</a> under the <a href="https://aletheiaware.com/terms-of-service.html">Terms of Service"</a> and <a href="https://aletheiaware.com/privacy-policy.html">Privacy Policy</a></string>
-    <string name="legalese_terms_of_service">I understand, and agree to the Terms of Service</string>
-    <string name="legalese_privacy_policy">I understand, and agree to the Privacy Policy</string>
-    <string name="legalese_beta_label">This beta version of BC is made available under the <a href="https://aletheiaware.com/beta/index.html">Beta Test Program</a></string>
-    <string name="legalese_beta_test_agreement">I understand, and agree to the Beta Test Agreement</string>
 
     <string name="stripe_action">Submit</string>
     <string name="stripe_amount">Amount</string>
@@ -106,14 +95,10 @@ limitations under the License.
     <string name="unlock_keys_password">Password</string>
     <string name="unlock_keys_label">Unlock your keys by entering your password</string>
 
-    <string name="support_subject">Support: </string>
-    <string name="support_email">support@aletheiaware.com</string>
-
     <string name="title_activity_access">Access</string>
     <string name="title_activity_account">Account</string>
     <string name="title_activity_create_account">Create Account</string>
     <string name="title_dialog_creating_account">Creating Account</string>
-    <string name="title_dialog_error">Error</string>
     <string name="title_dialog_stripe">Stripe</string>
 
 </resources>

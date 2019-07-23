@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2019 Aletheia Ware LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<resources>
+
+    <public name="background" type="color"/>
+    <public name="foreground" type="color"/>
+    <public name="primary" type="color"/>
+    <public name="primary_dark" type="color"/>
+    <public name="accent" type="color"/>
+    <public name="text_primary" type="color"/>
+    <public name="text_secondary" type="color"/>
+    <public name="text" type="color"/>
+    <public name="warning" type="color"/>
+
+    <public name="activity_padding" type="dimen"/>
+    <public name="view_margin" type="dimen"/>
+    <public name="view_padding" type="dimen"/>
+    <public name="text_primary_size" type="dimen"/>
+    <public name="text_secondary_size" type="dimen"/>
+
+    <public name="aletheia_ware_llc_logo" type="drawable"/>
+    <public name="create_account" type="drawable"/>
+
+    <public name="app_name" type="string"/>
+    <public name="aletheia_ware_llc_logo" type="string"/>
+    <public name="error_report" type="string"/>
+    <public name="error_terms_of_service_required" type="string"/>
+    <public name="error_privacy_policy_required" type="string"/>
+    <public name="error_beta_test_agreement_required" type="string"/>
+    <public name="legalese_label" type="string"/>
+    <public name="legalese_terms_of_service" type="string"/>
+    <public name="legalese_privacy_policy" type="string"/>
+    <public name="legalese_beta_label" type="string"/>
+    <public name="legalese_beta_test_agreement" type="string"/>
+    <public name="preference_about_title" type="string"/>
+    <public name="preference_app_version_key" type="string"/>
+    <public name="preference_app_version_title" type="string"/>
+    <public name="preference_support_key" type="string"/>
+    <public name="preference_support_title" type="string"/>
+    <public name="preference_support_description" type="string"/>
+    <public name="support_subject" type="string"/>
+    <public name="support_email" type="string"/>
+    <public name="title_dialog_error" type="string"/>
+
+    <public name="access_create_account_label" type="string"/>
+    <public name="access_biometric_unlock_title" type="string"/>
+    <public name="access_biometric_unlock_description" type="string"/>
+    <public name="account_alias" type="string"/>
+    <public name="account_public_key" type="string"/>
+    <public name="account_customer" type="string"/>
+    <public name="account_not_registered" type="string"/>
+    <public name="account_subscription" type="string"/>
+    <public name="account_not_subscribed" type="string"/>
+    <public name="account_register" type="string"/>
+    <public name="account_subscribe" type="string"/>
+    <public name="create_account" type="string"/>
+    <public name="create_account_action" type="string"/>
+    <public name="create_account_label" type="string"/>
+    <public name="create_account_choose_alias" type="string"/>
+    <public name="create_account_choose_password" type="string"/>
+    <public name="create_account_confirm_password" type="string"/>
+    <public name="create_account_step_1" type="string"/>
+    <public name="create_account_step_2" type="string"/>
+    <public name="create_account_step_3" type="string"/>
+    <public name="delete_keys" type="string"/>
+    <public name="delete_keys_action" type="string"/>
+    <public name="delete_keys_legalese" type="string"/>
+    <public name="error_alias_invalid" type="string"/>
+    <public name="error_alias_taken" type="string"/>
+    <public name="error_alias_too_long" type="string"/>
+    <public name="error_create_account" type="string"/>
+    <public name="error_email_invalid" type="string"/>
+    <public name="error_export_key_pair" type="string"/>
+    <public name="error_import_key_pair" type="string"/>
+    <public name="error_invalid_email" type="string"/>
+    <public name="error_password_short" type="string"/>
+    <public name="error_password_lengths_differ" type="string"/>
+    <public name="error_passwords_differ" type="string"/>
+    <public name="error_read_alias_failed" type="string"/>
+    <public name="error_read_finance_failed" type="string"/>
+    <public name="error_stripe_invalid_payment" type="string"/>
+    <public name="error_unlock_keys" type="string"/>
+    <public name="error_biometric_unlock" type="string"/>
+    <public name="error_biometric_enroll" type="string"/>
+    <public name="export_keys" type="string"/>
+    <public name="export_keys_action" type="string"/>
+    <public name="export_keys_alias" type="string"/>
+    <public name="export_keys_access_code" type="string"/>
+    <public name="export_keys_label" type="string"/>
+    <public name="import_keys" type="string"/>
+    <public name="import_keys_action" type="string"/>
+    <public name="import_keys_alias" type="string"/>
+    <public name="import_keys_access_code" type="string"/>
+    <public name="import_keys_label" type="string"/>
+    <public name="stripe_action" type="string"/>
+    <public name="stripe_amount" type="string"/>
+    <public name="stripe_description" type="string"/>
+    <public name="stripe_email" type="string"/>
+    <public name="stripe_payment_method" type="string"/>
+    <public name="stripe_publishable_key" type="string"/>
+    <public name="stripe_step_1" type="string"/>
+    <public name="stripe_step_2" type="string"/>
+    <public name="stripe_step_3" type="string"/>
+    <public name="switch_keys" type="string"/>
+    <public name="switch_keys_action" type="string"/>
+    <public name="unlock_keys" type="string"/>
+    <public name="unlock_keys_action" type="string"/>
+    <public name="unlock_keys_alias" type="string"/>
+    <public name="unlock_keys_password" type="string"/>
+    <public name="unlock_keys_label" type="string"/>
+    <public name="title_activity_access" type="string"/>
+    <public name="title_activity_account" type="string"/>
+    <public name="title_activity_create_account" type="string"/>
+    <public name="title_dialog_creating_account" type="string"/>
+    <public name="title_dialog_stripe" type="string"/>
+
+    <public name="AppTheme" type="style"/>
+    <public name="AppTheme.NoActionBar" type="style"/>
+    <public name="AppTheme.Button" type="style"/>
+    <public name="AlertDialogTheme" type="style"/>
+    <public name="AlertDialogPositiveButtonStyle" type="style"/>
+    <public name="AlertDialogNegativeButtonStyle" type="style"/>
+</resources>

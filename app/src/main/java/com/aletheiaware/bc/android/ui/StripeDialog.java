@@ -27,7 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.aletheiaware.bc.android.R;
-import com.aletheiaware.bc.android.utils.BCAndroidUtils;
+import com.aletheiaware.common.android.utils.CommonAndroidUtils;
 import com.stripe.android.Stripe;
 import com.stripe.android.TokenCallback;
 import com.stripe.android.model.Card;
@@ -88,15 +88,15 @@ public abstract class StripeDialog {
             public void onClick(DialogInterface dialog, int id) {
                 // Legal
                 if (!termsCheck.isChecked()) {
-                    BCAndroidUtils.showErrorDialog(activity, activity.getString(R.string.error_terms_of_service_required));
+                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(com.aletheiaware.common.android.R.string.error_terms_of_service_required));
                     return;
                 }
                 if (!policyCheck.isChecked()) {
-                    BCAndroidUtils.showErrorDialog(activity, activity.getString(R.string.error_privacy_policy_required));
+                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(com.aletheiaware.common.android.R.string.error_privacy_policy_required));
                     return;
                 }
                 if (!betaCheck.isChecked()) {
-                    BCAndroidUtils.showErrorDialog(activity, activity.getString(R.string.error_beta_test_agreement_required));
+                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(com.aletheiaware.common.android.R.string.error_beta_test_agreement_required));
                     return;
                 }
 
@@ -104,7 +104,7 @@ public abstract class StripeDialog {
                 final String email = emailText.getText().toString();
                 // TODO ensure email is valid
                 if (email.isEmpty()) {
-                    BCAndroidUtils.showErrorDialog(activity, activity.getString(R.string.error_invalid_email));
+                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(R.string.error_invalid_email));
                     return;
                 }
 
@@ -118,7 +118,7 @@ public abstract class StripeDialog {
                     stripe.createToken(card, new TokenCallback() {
                         @Override
                         public void onError(@NonNull Exception error) {
-                            BCAndroidUtils.showErrorDialog(activity, R.string.error_stripe_invalid_payment, error);
+                            CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, R.string.error_stripe_invalid_payment, error);
                         }
 
                         @Override

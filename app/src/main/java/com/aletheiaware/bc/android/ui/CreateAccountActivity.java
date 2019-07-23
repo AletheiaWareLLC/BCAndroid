@@ -37,6 +37,7 @@ import com.aletheiaware.bc.Network;
 import com.aletheiaware.bc.TCPNetwork;
 import com.aletheiaware.bc.android.R;
 import com.aletheiaware.bc.android.utils.BCAndroidUtils;
+import com.aletheiaware.common.android.utils.CommonAndroidUtils;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -127,7 +128,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 }
                             });
                         } catch (IOException e) {
-                            BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.string.error_read_alias_failed, e);
+                            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, R.string.error_read_alias_failed, e);
                         }
                     }
                 }.start();
@@ -148,15 +149,15 @@ public class CreateAccountActivity extends AppCompatActivity {
     private void createAccount() {
         // Legal
         if (!termsCheck.isChecked()) {
-            BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, getString(R.string.error_terms_of_service_required));
+            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_terms_of_service_required));
             return;
         }
         if (!policyCheck.isChecked()) {
-            BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, getString(R.string.error_privacy_policy_required));
+            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_privacy_policy_required));
             return;
         }
         if (!betaCheck.isChecked()) {
-            BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, getString(R.string.error_beta_test_agreement_required));
+            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_beta_test_agreement_required));
             return;
         }
 
@@ -164,7 +165,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         final String alias = aliasText.getText().toString();
         // TODO ensure alias is valid
         if (alias.isEmpty()) {
-            BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, getString(R.string.error_alias_invalid));
+            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_alias_invalid));
             return;
         }
 
@@ -172,11 +173,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         // TODO ensure password meets minimum security
         final int passwordLength = newPasswordText.length();
         if (passwordLength < 12) {
-            BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, getString(R.string.error_password_short));
+            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_password_short));
             return;
         }
         if (passwordLength != confirmPasswordText.length()) {
-            BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, getString(R.string.error_password_lengths_differ));
+            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_password_lengths_differ));
             return;
         }
 
@@ -185,7 +186,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         newPasswordText.getText().getChars(0, passwordLength, newPassword, 0);
         confirmPasswordText.getText().getChars(0, passwordLength, confirmPassword, 0);
         if (!Arrays.equals(newPassword, confirmPassword)) {
-            BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, getString(R.string.error_passwords_differ));
+            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_passwords_differ));
             return;
         }
 
@@ -194,7 +195,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             public void run() {
                 try {
                     if (!AliasUtils.isUnique(cache, network, alias)) {
-                        BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, getString(R.string.error_alias_taken));
+                        CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_alias_taken));
                         return;
                     }
                 } catch (IOException e) {
@@ -228,7 +229,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     setProgressBar(6);
                     // TODO show user the generated key pair, explain public vs private key, and provide options to backup keys
                 } catch (BadPaddingException | IOException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException | InvalidKeySpecException | InvalidParameterSpecException | NoSuchAlgorithmException | NoSuchPaddingException | SignatureException e) {
-                    BCAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.string.error_create_account, e);
+                    CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, R.string.error_create_account, e);
                 } finally {
                     runOnUiThread(new Runnable() {
                         @Override

@@ -37,6 +37,7 @@ import com.aletheiaware.bc.android.R;
 import com.aletheiaware.bc.android.utils.BCAndroidUtils;
 import com.aletheiaware.bc.android.utils.BiometricUtils;
 import com.aletheiaware.bc.utils.BCUtils;
+import com.aletheiaware.common.android.utils.CommonAndroidUtils;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -91,7 +92,7 @@ public class AccessActivity extends AppCompatActivity {
                                         }
                                     });
                                 } catch (Exception e) {
-                                    BCAndroidUtils.showErrorDialog(AccessActivity.this, R.string.error_import_key_pair, e);
+                                    CommonAndroidUtils.showErrorDialog(AccessActivity.this, R.style.AlertDialogTheme, R.string.error_import_key_pair, e);
                                 }
                             }
                         }.start();
@@ -199,7 +200,7 @@ public class AccessActivity extends AppCompatActivity {
                 try {
                     unlock(alias, password);
                 } catch (BadPaddingException | IOException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException | InvalidKeySpecException | InvalidParameterSpecException | NoSuchAlgorithmException | NoSuchPaddingException e) {
-                    BCAndroidUtils.showErrorDialog(AccessActivity.this, R.string.error_unlock_keys, e);
+                    CommonAndroidUtils.showErrorDialog(AccessActivity.this, R.style.AlertDialogTheme, R.string.error_unlock_keys, e);
                 }
             }
         }.create();

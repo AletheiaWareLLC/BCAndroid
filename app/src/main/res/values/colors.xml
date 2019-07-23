@@ -15,13 +15,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <resources>
-    <color name="background">#FFFFFF</color>
-    <color name="foreground">#000000</color>
-    <color name="primary">#008577</color>
-    <color name="primary_dark">#00574B</color>
-    <color name="accent">#D81B60</color>
-    <color name="text">#000000</color>
-    <color name="text_primary">#8A8A8A</color>
-    <color name="text_secondary">#DEDEDE</color>
-    <color name="warning">#FF0000</color>
+
+    <color name="background">#FFFFFFFF</color>
+    <color name="foreground">#FF000000</color>
+    <color name="primary">#FF0000FF</color>
+    <color name="primary_dark">#FF00007F</color>
+    <color name="accent">#FFE00000</color>
+    <color name="text_primary">#FFC0C0C0</color>
+    <color name="text_secondary">#FFDFDFDF</color>
+    <color name="text">#FFFFFFFF</color>
+    <color name="warning">#FFFF0000</color>
+
 </resources>

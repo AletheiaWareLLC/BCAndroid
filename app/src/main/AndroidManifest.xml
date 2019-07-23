@@ -28,8 +28,7 @@ limitations under the License.
 
     <application
         android:allowBackup="true"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true">
         <activity
             android:name=".ui.AccessActivity"
             android:label="@string/title_activity_access"
