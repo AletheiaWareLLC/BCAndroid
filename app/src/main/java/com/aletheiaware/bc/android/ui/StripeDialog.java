@@ -49,11 +49,6 @@ public abstract class StripeDialog {
 
     public void create() {
         View stripeView = View.inflate(activity, R.layout.dialog_stripe, null);
-        final CheckBox termsCheck = stripeView.findViewById(R.id.stripe_terms_of_service_check);
-        final CheckBox policyCheck = stripeView.findViewById(R.id.stripe_privacy_policy_check);
-        TextView legaleseBetaLabel = stripeView.findViewById(R.id.stripe_legalese_beta_label);
-        legaleseBetaLabel.setMovementMethod(LinkMovementMethod.getInstance());
-        final CheckBox betaCheck = stripeView.findViewById(R.id.stripe_beta_test_agreement_check);
         TextView descriptionLabel = stripeView.findViewById(R.id.stripe_description_label);
         TextView descriptionText = stripeView.findViewById(R.id.stripe_description_text);
         if (description != null && !description.isEmpty()) {
@@ -74,32 +69,16 @@ public abstract class StripeDialog {
             amountLabel.setVisibility(View.GONE);
             amountText.setVisibility(View.GONE);
         }
+        final CardInputWidget cardWidget = stripeView.findViewById(R.id.stripe_card_widget);
         final EditText emailText = stripeView.findViewById(R.id.stripe_email_text);
         emailText.setFocusable(true);
         emailText.setFocusableInTouchMode(true);
-        final CardInputWidget cardWidget = stripeView.findViewById(R.id.stripe_card_widget);
-        TextView legaleseLabel = stripeView.findViewById(R.id.stripe_legalese_label);
-        legaleseLabel.setMovementMethod(LinkMovementMethod.getInstance());
         AlertDialog.Builder ab = new AlertDialog.Builder(activity, R.style.AlertDialogTheme);
         ab.setTitle(R.string.title_dialog_stripe);
         ab.setView(stripeView);
         ab.setPositiveButton(R.string.stripe_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                // Legal
-                if (!termsCheck.isChecked()) {
-                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(com.aletheiaware.common.android.R.string.error_terms_of_service_required));
-                    return;
-                }
-                if (!policyCheck.isChecked()) {
-                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(com.aletheiaware.common.android.R.string.error_privacy_policy_required));
-                    return;
-                }
-                if (!betaCheck.isChecked()) {
-                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(com.aletheiaware.common.android.R.string.error_beta_test_agreement_required));
-                    return;
-                }
-
                 // Email
                 final String email = emailText.getText().toString();
                 // TODO ensure email is valid
@@ -108,12 +87,16 @@ public abstract class StripeDialog {
                     return;
                 }
 
-                // TODO mine terms of service agreement into blockchain
-                // TODO mine privacy policy agreement into blockchain
-                // TODO mine beta test agreement into blockchain
-
                 Card card = cardWidget.getCard();
                 if (card != null) {
+                    if (!card.validateCard()) {
+                        CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(R.string.error_invalid_card));
+                        return;
+                    }
+                    if (!card.validateCVC()) {
+                        CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(R.string.error_invalid_cvc));
+                        return;
+                    }
                     Stripe stripe = new Stripe(activity, activity.getString(R.string.stripe_publishable_key));
                     stripe.createToken(card, new TokenCallback() {
                         @Override
@@ -130,7 +113,6 @@ public abstract class StripeDialog {
             }
         });
         dialog = ab.show();
-        termsCheck.requestFocus();
     }
 
     public AlertDialog getDialog() {

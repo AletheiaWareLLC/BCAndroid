@@ -83,10 +83,11 @@ limitations under the License.
     <public name="error_alias_taken" type="string"/>
     <public name="error_alias_too_long" type="string"/>
     <public name="error_create_account" type="string"/>
-    <public name="error_email_invalid" type="string"/>
     <public name="error_export_key_pair" type="string"/>
     <public name="error_import_key_pair" type="string"/>
     <public name="error_invalid_email" type="string"/>
+    <public name="error_invalid_card" type="string"/>
+    <public name="error_invalid_cvc" type="string"/>
     <public name="error_password_short" type="string"/>
     <public name="error_password_lengths_differ" type="string"/>
     <public name="error_passwords_differ" type="string"/>

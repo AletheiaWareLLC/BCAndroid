@@ -71,49 +71,19 @@ limitations under the License.
             android:textSize="@dimen/text_primary_size" />
 
         <TextView
-            android:id="@+id/stripe_legalese_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/view_margin"
-            android:text="@string/legalese_label"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size" />
+            android:labelFor="@id/stripe_card_widget"
+            android:text="@string/stripe_payment_method"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_secondary_size" />
 
-        <CheckBox
-            android:id="@+id/stripe_terms_of_service_check"
+        <com.stripe.android.view.CardInputWidget
+            android:id="@+id/stripe_card_widget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:text="@string/legalese_terms_of_service"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"/>
-
-        <CheckBox
-            android:id="@+id/stripe_privacy_policy_check"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:text="@string/legalese_privacy_policy"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"/>
-
-        <TextView
-            android:id="@+id/stripe_legalese_beta_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:text="@string/legalese_beta_label"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size" />
-
-        <CheckBox
-            android:id="@+id/stripe_beta_test_agreement_check"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:text="@string/legalese_beta_test_agreement"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"/>
+            android:layout_margin="@dimen/view_margin" />
 
         <TextView
             android:layout_width="match_parent"
@@ -142,29 +112,6 @@ limitations under the License.
             android:inputType="textEmailAddress"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:text="@string/stripe_step_3"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:labelFor="@id/stripe_card_widget"
-            android:text="@string/stripe_payment_method"
-            android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_secondary_size" />
-
-        <com.stripe.android.view.CardInputWidget
-            android:id="@+id/stripe_card_widget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin" />
 
     </LinearLayout>
 

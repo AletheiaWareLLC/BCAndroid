@@ -50,10 +50,11 @@ limitations under the License.
     <string name="error_alias_taken">Alias already registered</string>
     <string name="error_alias_too_long">Alias too long: %d max: %d</string>
     <string name="error_create_account">Failed to create account</string>
-    <string name="error_email_invalid">Invalid email</string>
     <string name="error_export_key_pair">Failed to export keys</string>
     <string name="error_import_key_pair">Failed to import keys</string>
     <string name="error_invalid_email">Invalid email</string>
+    <string name="error_invalid_card">Invalid card</string>
+    <string name="error_invalid_cvc">Invalid CVC</string>
     <string name="error_password_short">Password must be at least 12 characters</string>
     <string name="error_password_lengths_differ">Password and confirm password differ in length</string>
     <string name="error_passwords_differ">Password and confirm password do not match</string>
@@ -82,9 +83,8 @@ limitations under the License.
     <string name="stripe_email">Email</string>
     <string name="stripe_payment_method">Payment Method</string>
     <string name="stripe_publishable_key">TODO</string>
-    <string name="stripe_step_1">Step 1: Legal</string>
+    <string name="stripe_step_1">Step 1: Payment Method</string>
     <string name="stripe_step_2">Step 2: Contact Information</string>
-    <string name="stripe_step_3">Step 3: Payment Method</string>
 
     <string name="switch_keys">Switch Keys</string>
     <string name="switch_keys_action">Switch</string>
