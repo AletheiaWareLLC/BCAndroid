@@ -112,7 +112,6 @@ limitations under the License.
     <public name="stripe_description" type="string"/>
     <public name="stripe_email" type="string"/>
     <public name="stripe_payment_method" type="string"/>
-    <public name="stripe_publishable_key" type="string"/>
     <public name="stripe_step_1" type="string"/>
     <public name="stripe_step_2" type="string"/>
     <public name="stripe_step_3" type="string"/>

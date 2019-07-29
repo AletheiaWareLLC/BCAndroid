@@ -20,9 +20,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,12 +35,14 @@ import com.stripe.android.view.CardInputWidget;
 public abstract class StripeDialog {
 
     private final Activity activity;
+    private final String publishableKey;
     private final String description;
     private final String amount;
     private AlertDialog dialog;
 
-    public StripeDialog(Activity activity, String description, String amount) {
+    public StripeDialog(Activity activity, String publishableKey, String description, String amount) {
         this.activity = activity;
+        this.publishableKey = publishableKey;
         this.description = description;
         this.amount = amount;
     }
@@ -97,7 +97,7 @@ public abstract class StripeDialog {
                         CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(R.string.error_invalid_cvc));
                         return;
                     }
-                    Stripe stripe = new Stripe(activity, activity.getString(R.string.stripe_publishable_key));
+                    Stripe stripe = new Stripe(activity, publishableKey);
                     stripe.createToken(card, new TokenCallback() {
                         @Override
                         public void onError(@NonNull Exception error) {
