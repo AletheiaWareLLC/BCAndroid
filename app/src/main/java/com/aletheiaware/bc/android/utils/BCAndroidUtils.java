@@ -22,6 +22,7 @@ import android.support.annotation.WorkerThread;
 import com.aletheiaware.bc.Cache;
 import com.aletheiaware.bc.android.BuildConfig;
 import com.aletheiaware.bc.utils.BCUtils;
+import com.aletheiaware.common.android.utils.CommonAndroidUtils;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -104,22 +105,9 @@ public class BCAndroidUtils {
         if (context != null) {
             File cache = context.getCacheDir();
             if (cache != null) {
-                return recursiveDelete(cache);
+                return CommonAndroidUtils.recursiveDelete(cache);
             }
         }
         return false;
-    }
-
-    private static boolean recursiveDelete(File file) {
-        if (file.isDirectory()) {
-            for (File f : file.listFiles()) {
-                if (!recursiveDelete(f)) {
-                    return false;
-                }
-            }
-        } else {
-            return file.delete();
-        }
-        return true;
     }
 }
