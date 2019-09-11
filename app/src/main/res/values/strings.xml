@@ -35,8 +35,8 @@ limitations under the License.
     <string name="create_account">Create Account</string>
     <string name="create_account_action">Create</string>
     <string name="create_account_label">Create a new account</string>
-    <string name="create_account_choose_alias">Choose Alias</string>
-    <string name="create_account_choose_password">Choose Password</string>
+    <string name="create_account_choose_alias">Choose Alias (maximum 100 characters)</string>
+    <string name="create_account_choose_password">Choose Password (minimum 12 characters)</string>
     <string name="create_account_confirm_password">Confirm Password</string>
     <string name="create_account_step_1">Step 1: Legal</string>
     <string name="create_account_step_2">Step 2: Alias</string>
