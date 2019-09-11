@@ -75,6 +75,7 @@ public abstract class StripeDialog {
         emailText.setFocusableInTouchMode(true);
         AlertDialog.Builder ab = new AlertDialog.Builder(activity, R.style.AlertDialogTheme);
         ab.setTitle(R.string.title_dialog_stripe);
+        ab.setIcon(R.drawable.payment);
         ab.setView(stripeView);
         ab.setPositiveButton(R.string.stripe_action, new DialogInterface.OnClickListener() {
             @Override
