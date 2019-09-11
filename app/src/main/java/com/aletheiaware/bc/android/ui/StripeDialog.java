@@ -71,8 +71,6 @@ public abstract class StripeDialog {
         }
         final CardInputWidget cardWidget = stripeView.findViewById(R.id.stripe_card_widget);
         final EditText emailText = stripeView.findViewById(R.id.stripe_email_text);
-        emailText.setFocusable(true);
-        emailText.setFocusableInTouchMode(true);
         AlertDialog.Builder ab = new AlertDialog.Builder(activity, R.style.AlertDialogTheme);
         ab.setTitle(R.string.title_dialog_stripe);
         ab.setIcon(R.drawable.payment);
