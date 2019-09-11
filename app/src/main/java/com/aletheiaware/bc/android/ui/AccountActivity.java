@@ -31,11 +31,8 @@ import com.aletheiaware.bc.Crypto;
 import com.aletheiaware.bc.Network;
 import com.aletheiaware.bc.android.R;
 import com.aletheiaware.bc.android.utils.BCAndroidUtils;
-import com.aletheiaware.bc.android.utils.CopyToClipboardListener;
-import com.aletheiaware.bc.utils.BCUtils;
 import com.aletheiaware.common.android.utils.CommonAndroidUtils;
-import com.aletheiaware.finance.utils.FinanceUtils;
-import com.stripe.android.model.Token;
+import com.aletheiaware.common.android.utils.CopyToClipboardListener;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;

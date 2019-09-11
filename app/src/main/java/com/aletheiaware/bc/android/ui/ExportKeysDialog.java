@@ -23,7 +23,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aletheiaware.bc.android.R;
-import com.aletheiaware.bc.android.utils.CopyToClipboardListener;
+
+import com.aletheiaware.common.android.utils.CopyToClipboardListener;
 
 public abstract class ExportKeysDialog {
 
