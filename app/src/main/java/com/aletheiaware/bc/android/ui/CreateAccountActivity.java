@@ -168,6 +168,10 @@ public class CreateAccountActivity extends AppCompatActivity {
             CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_alias_invalid));
             return;
         }
+        if (alias.length() > AliasUtils.MAX_ALIAS_LENGTH) {
+            CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, getString(R.string.error_alias_too_long, alias.length(), AliasUtils.MAX_ALIAS_LENGTH));
+            return;
+        }
 
         // Password
         // TODO ensure password meets minimum security
