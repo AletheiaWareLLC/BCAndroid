@@ -21,14 +21,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.aletheiaware.bc.Cache;
 import com.aletheiaware.bc.Crypto;
-import com.aletheiaware.bc.Network;
 import com.aletheiaware.bc.android.R;
 import com.aletheiaware.bc.android.utils.BCAndroidUtils;
 import com.aletheiaware.common.android.utils.CommonAndroidUtils;
@@ -152,8 +149,6 @@ public class AccountActivity extends AppCompatActivity {
                     case RESULT_CANCELED:
                         setResult(RESULT_CANCELED);
                         finish();
-                        break;
-                    default:
                         break;
                 }
                 break;

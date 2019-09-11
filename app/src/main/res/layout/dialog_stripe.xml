@@ -108,6 +108,7 @@ limitations under the License.
             android:layout_margin="@dimen/view_margin"
             android:gravity="center"
             android:imeOptions="actionDone"
+            android:autofillHints="emailAddress"
             android:inputType="textEmailAddress"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size" />

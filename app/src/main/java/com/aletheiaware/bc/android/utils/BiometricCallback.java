@@ -19,7 +19,6 @@ package com.aletheiaware.bc.android.utils;
 import android.annotation.TargetApi;
 import android.hardware.biometrics.BiometricPrompt;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.os.CancellationSignal;
 
 @TargetApi(Build.VERSION_CODES.P)

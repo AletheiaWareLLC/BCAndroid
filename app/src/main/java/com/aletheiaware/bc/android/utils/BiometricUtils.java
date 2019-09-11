@@ -31,7 +31,6 @@ import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 
 import com.aletheiaware.bc.Crypto;
 import com.aletheiaware.bc.android.R;
-import com.aletheiaware.bc.utils.BCUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -56,19 +56,19 @@ import javax.crypto.NoSuchPaddingException;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    Cache cache;
-    Network network;
-    TextView legaleseLabel;
-    CheckBox termsCheck;
-    CheckBox policyCheck;
-    TextView legaleseBetaLabel;
-    CheckBox betaCheck;
-    EditText aliasText;
-    EditText newPasswordText;
-    EditText confirmPasswordText;
-    Button button;
-    ProgressBar progressBar;
-    AlertDialog progressDialog;
+    private Cache cache;
+    private Network network;
+    private TextView legaleseLabel;
+    private CheckBox termsCheck;
+    private CheckBox policyCheck;
+    private TextView legaleseBetaLabel;
+    private CheckBox betaCheck;
+    private EditText aliasText;
+    private EditText newPasswordText;
+    private EditText confirmPasswordText;
+    private Button button;
+    private ProgressBar progressBar;
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
