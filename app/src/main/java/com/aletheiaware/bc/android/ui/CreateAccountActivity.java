@@ -220,17 +220,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                 });
                 try {
                     // TODO mine terms of service agreement into blockchain
-                    setProgressBar(1);
+                    setProgressBar(10);
                     // TODO mine privacy policy agreement into blockchain
-                    setProgressBar(2);
+                    setProgressBar(20);
                     // TODO mine beta test agreement into blockchain
-                    setProgressBar(3);
+                    setProgressBar(30);
                     final KeyPair keyPair = Crypto.createRSAKeyPair(getFilesDir(), alias, newPassword);
-                    setProgressBar(4);
+                    setProgressBar(50);
                     AliasUtils.registerAlias(BCAndroidUtils.getBCWebsite(), alias, keyPair);
-                    setProgressBar(5);
+                    setProgressBar(70);
                     BCAndroidUtils.initialize(alias, keyPair, cache);
-                    setProgressBar(6);
+                    setProgressBar(90);
                     // TODO show user the generated key pair, explain public vs private key, and provide options to backup keys
                 } catch (BadPaddingException | IOException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException | InvalidKeySpecException | InvalidParameterSpecException | NoSuchAlgorithmException | NoSuchPaddingException | SignatureException e) {
                     CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, R.string.error_create_account, e);

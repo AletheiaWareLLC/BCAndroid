@@ -20,4 +20,6 @@ limitations under the License.
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/view_margin"
-    android:max="8" />
+    android:max="100" />
+
+<!-- TODO add TextView to display status information about current task -->
