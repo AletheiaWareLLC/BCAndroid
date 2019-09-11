@@ -17,7 +17,7 @@ limitations under the License.
 <resources>
 
     <string name="app_name">App Name</string>
-    <string name="app_logo">App Logo</string>
+    <string name="app_logo_description">App Logo</string>
 
     <string name="access_create_account_label">Create Account</string>
     <string name="access_biometric_unlock_title">Biometric Unlock</string>

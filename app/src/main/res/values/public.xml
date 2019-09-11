@@ -33,10 +33,13 @@ limitations under the License.
     <public name="text_secondary_size" type="dimen"/>
 
     <public name="aletheia_ware_llc_logo" type="drawable"/>
+    <public name="app_logo" type="drawable"/>
     <public name="create_account" type="drawable"/>
 
+    <public name="dialog_progress" type="layout"/>
+
+    <public name="app_logo_description" type="string"/>
     <public name="app_name" type="string"/>
-    <public name="aletheia_ware_llc_logo" type="string"/>
     <public name="error_report" type="string"/>
     <public name="error_terms_of_service_required" type="string"/>
     <public name="error_privacy_policy_required" type="string"/>
