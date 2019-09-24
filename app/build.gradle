@@ -6,8 +6,8 @@ android {
         minSdkVersion 22
         targetSdkVersion 28
         vectorDrawables.useSupportLibrary = true
-        versionCode 13
-        versionName "1.3"
+        versionCode 14
+        versionName "1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -23,11 +23,11 @@ android {
 }
 
 dependencies {
-    compileOnly files('libs/AletheiaWareCommonJava.jar')
-    compileOnly files('libs/AliasJava.jar')
-    compileOnly files('libs/BCJava.jar')
-    compileOnly files('libs/FinanceJava.jar')
-    compileOnly files('libs/protobuf-lite-3.0.1.jar')
+    compileOnly files('../../AletheiaWareCommonJava/out/AletheiaWareCommonJava.jar')
+    compileOnly files('../../AliasJava/out/AliasJava.jar')
+    compileOnly files('../../BCJava/out/BCJava.jar')
+    compileOnly files('../../FinanceJava/out/FinanceJava.jar')
+    compileOnly files('../../JavaCommon/libs/protobuf-java-3.9.1.jar')
     compileOnly 'com.stripe:stripe-android:9.3.2'
     debugApi project(path:':aletheiaware-common-android', configuration: 'debug')
     releaseApi project(path:':aletheiaware-common-android', configuration: 'release')
