@@ -43,7 +43,9 @@ limitations under the License.
             android:imeOptions="actionDone"
             android:gravity="center"
             android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size" />
+            android:textSize="@dimen/text_primary_size">
+            <requestFocus/>
+        </EditText>
 
         <TextView
             android:layout_width="match_parent"

@@ -48,7 +48,9 @@ limitations under the License.
             android:layout_margin="@dimen/view_margin"
             android:text="@string/legalese_terms_of_service"
             android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"/>
+            android:textSize="@dimen/text_primary_size">
+            <requestFocus/>
+        </CheckBox>
 
         <CheckBox
             android:id="@+id/create_account_privacy_policy_check"
