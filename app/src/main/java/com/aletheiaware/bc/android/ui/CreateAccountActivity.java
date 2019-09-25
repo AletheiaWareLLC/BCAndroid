@@ -17,6 +17,7 @@
 package com.aletheiaware.bc.android.ui;
 
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -68,6 +69,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText confirmPasswordText;
     private Button button;
     private ProgressBar progressBar;
+    private TextView progressStatus;
     private AlertDialog progressDialog;
 
     @Override
@@ -210,27 +212,30 @@ public class CreateAccountActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         View progressView = View.inflate(CreateAccountActivity.this, R.layout.dialog_progress, null);
-                        progressBar = progressView.findViewById(R.id.progress);
+                        progressBar = progressView.findViewById(R.id.progress_bar);
+                        progressBar.setMax(6);
+                        progressStatus = progressView.findViewById(R.id.progress_status);
+                        progressStatus.setVisibility(View.VISIBLE);
                         progressDialog = new AlertDialog.Builder(CreateAccountActivity.this, R.style.AlertDialogTheme)
                                 .setTitle(R.string.title_dialog_creating_account)
                                 .setCancelable(false)
-                                .setView(progressBar)
+                                .setView(progressView)
                                 .show();
                     }
                 });
                 try {
+                    setProgressBar(1, R.string.create_account_saving_terms_of_service);
                     // TODO mine terms of service agreement into blockchain
-                    setProgressBar(10);
+                    setProgressBar(2, R.string.create_account_saving_privacy_policy);
                     // TODO mine privacy policy agreement into blockchain
-                    setProgressBar(20);
+                    setProgressBar(3, R.string.create_account_saving_beta_test_agreement);
                     // TODO mine beta test agreement into blockchain
-                    setProgressBar(30);
+                    setProgressBar(4, R.string.create_account_generating_keys);
                     final KeyPair keyPair = Crypto.createRSAKeyPair(getFilesDir(), alias, newPassword);
-                    setProgressBar(50);
+                    setProgressBar(5, R.string.create_account_registering_alias);
                     AliasUtils.registerAlias(BCAndroidUtils.getBCWebsite(), alias, keyPair);
-                    setProgressBar(70);
+                    setProgressBar(6, R.string.create_account_initializing_bc);
                     BCAndroidUtils.initialize(alias, keyPair, cache);
-                    setProgressBar(90);
                     // TODO show user the generated key pair, explain public vs private key, and provide options to backup keys
                 } catch (BadPaddingException | IOException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException | InvalidKeySpecException | InvalidParameterSpecException | NoSuchAlgorithmException | NoSuchPaddingException | SignatureException e) {
                     CommonAndroidUtils.showErrorDialog(CreateAccountActivity.this, R.style.AlertDialogTheme, R.string.error_create_account, e);
@@ -250,12 +255,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void setProgressBar(final int v) {
+    private void setProgressBar(final int v, final @StringRes int s) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (progressBar != null) {
                     progressBar.setProgress(v);
+                }
+                if (progressStatus != null) {
+                    progressStatus.setText(s);
                 }
             }
         });

@@ -14,12 +14,25 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/progress"
-    style="?android:attr/progressBarStyleHorizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/view_margin"
-    android:max="100" />
+    android:orientation="vertical">
 
-<!-- TODO add TextView to display status information about current task -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/view_margin"
+        android:max="100" />
+
+    <TextView
+        android:id="@+id/progress_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_secondary_size"
+        android:textColor="@color/text_secondary"
+        android:visibility="gone"/>
+
+</LinearLayout>
