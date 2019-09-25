@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.aletheiaware.bc.android.R;
+import com.aletheiaware.common.android.utils.CommonAndroidUtils;
 
 public abstract class ImportKeysDialog {
 
@@ -46,7 +47,18 @@ public abstract class ImportKeysDialog {
         ab.setPositiveButton(R.string.import_keys_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                onImport(dialog, aliasText.getText().toString(), accessCodeText.getText().toString());
+                String alias = aliasText.getText().toString();
+                // TODO this is bad error handling - dialog will still be dismissed
+                if (alias.isEmpty()) {
+                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(R.string.error_alias_invalid));
+                    return;
+                }
+                String accessCode = accessCodeText.getText().toString();
+                if (accessCode.isEmpty()) {
+                    CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(R.string.error_access_code_invalid));
+                    return;
+                }
+                onImport(dialog, alias, accessCode);
             }
         });
         dialog = ab.show();

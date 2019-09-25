@@ -52,6 +52,7 @@ limitations under the License.
     <string name="delete_keys_action">Delete</string>
     <string name="delete_keys_legalese">Deleting your keys from this device will not delete your data from the blockchain, however it will remove this device\'s access to that data. Once deleted, keys are not recoverable.</string>
 
+    <string name="error_access_code_invalid">Invalid access code</string>
     <string name="error_alias_invalid">Invalid alias</string>
     <string name="error_alias_taken">Alias already registered</string>
     <string name="error_alias_too_long">Alias too long: %d max: %d</string>
