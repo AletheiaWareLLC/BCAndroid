@@ -34,7 +34,9 @@ limitations under the License.
 
     <public name="aletheia_ware_llc_logo" type="drawable"/>
     <public name="app_logo" type="drawable"/>
+    <public name="account" type="drawable"/>
     <public name="create_account" type="drawable"/>
+    <public name="payment" type="drawable"/>
 
     <public name="dialog_progress" type="layout"/>
 

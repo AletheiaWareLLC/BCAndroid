@@ -63,41 +63,53 @@ limitations under the License.
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size" />
 
-        <Button
-            android:id="@+id/account_export_button"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/view_margin"
-            android:background="@color/accent"
-            android:padding="@dimen/view_padding"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"
-            android:text="@string/export_keys" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/view_margin">
 
-        <Button
-            android:id="@+id/account_switch_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/view_margin"
-            android:background="@color/accent"
-            android:padding="@dimen/view_padding"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"
-            android:text="@string/switch_keys" />
+            <Button
+                android:id="@+id/account_export_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/view_margin"
+                android:background="@color/accent"
+                android:padding="@dimen/view_padding"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_primary_size"
+                android:text="@string/export_keys"
+                android:drawableStart="@drawable/export_keys" />
 
-        <Button
-            android:id="@+id/account_delete_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/view_margin"
-            android:background="@color/warning"
-            android:padding="@dimen/view_padding"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_primary_size"
-            android:text="@string/delete_keys" />
+            <Button
+                android:id="@+id/account_switch_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/view_margin"
+                android:background="@color/accent"
+                android:padding="@dimen/view_padding"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_primary_size"
+                android:text="@string/switch_keys"
+                android:drawableStart="@drawable/switch_keys" />
+
+            <Button
+                android:id="@+id/account_delete_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/view_margin"
+                android:background="@color/warning"
+                android:padding="@dimen/view_padding"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_primary_size"
+                android:text="@string/delete_keys"
+                android:drawableStart="@drawable/delete" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -71,7 +71,8 @@ limitations under the License.
             android:padding="@dimen/view_padding"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size"
-            android:text="@string/create_account" />
+            android:text="@string/create_account"
+            android:drawableStart="@drawable/create_account" />
 
         <Button
             android:id="@+id/access_import_keys"
@@ -83,7 +84,8 @@ limitations under the License.
             android:padding="@dimen/view_padding"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_primary_size"
-            android:text="@string/import_keys" />
+            android:text="@string/import_keys"
+            android:drawableStart="@drawable/import_keys" />
 
     </LinearLayout>
 
