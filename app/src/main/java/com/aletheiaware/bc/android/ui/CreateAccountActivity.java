@@ -17,9 +17,9 @@
 package com.aletheiaware.bc.android.ui;
 
 import android.os.Bundle;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;

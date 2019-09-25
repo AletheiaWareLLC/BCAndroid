@@ -17,7 +17,7 @@
 package com.aletheiaware.bc.android.utils;
 
 import android.content.Context;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.aletheiaware.bc.Cache;
 import com.aletheiaware.bc.android.BuildConfig;

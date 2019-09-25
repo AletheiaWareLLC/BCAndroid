@@ -18,8 +18,8 @@ package com.aletheiaware.bc.android.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;

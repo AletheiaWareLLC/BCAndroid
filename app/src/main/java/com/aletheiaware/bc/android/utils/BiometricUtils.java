@@ -26,8 +26,8 @@ import android.os.Build;
 import android.os.CancellationSignal;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat;
 
 import com.aletheiaware.bc.Crypto;
 import com.aletheiaware.bc.android.R;
