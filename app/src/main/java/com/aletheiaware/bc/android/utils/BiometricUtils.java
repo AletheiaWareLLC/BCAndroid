@@ -33,7 +33,6 @@ import com.aletheiaware.bc.Crypto;
 import com.aletheiaware.bc.android.R;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -41,6 +40,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.util.concurrent.CountDownLatch;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -93,7 +93,7 @@ public class BiometricUtils {
     }
 
     @TargetApi(Build.VERSION_CODES.P)
-    public static void enableBiometricUnlock(final Context context, final String alias, final char[] password) throws InvalidAlgorithmParameterException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
+    public static void enableBiometricUnlock(final Context context, final String alias, final char[] password, final CountDownLatch latch) throws InvalidAlgorithmParameterException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
         // Generate key
         int purposes = KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT;
         KeyGenParameterSpec.Builder keySpecBuilder = new KeyGenParameterSpec.Builder(BIOMETRIC_KEY + alias, purposes)
@@ -119,17 +119,25 @@ public class BiometricUtils {
         BiometricCallback callback = new BiometricCallback(cancel) {
             @Override
             public void onAuthenticationFailed() {
-                // TODO
+                if (latch != null) {
+                    latch.countDown();
+                }
             }
 
             @Override
             public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
                 // TODO
+                if (latch != null) {
+                    latch.countDown();
+                }
             }
 
             @Override
             public void onAuthenticationError(int errorCode, CharSequence errString) {
                 // TODO
+                if (latch != null) {
+                    latch.countDown();
+                }
             }
 
             @Override
@@ -140,14 +148,11 @@ public class BiometricUtils {
                     Cipher cipher = result.getCryptoObject().getCipher();
                     out.write(cipher.getIV());
                     out.write(cipher.doFinal(new String(password).getBytes(StandardCharsets.UTF_8)));
-                } catch (FileNotFoundException e) {
+                } catch (IOException | BadPaddingException | IllegalBlockSizeException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (BadPaddingException e) {
-                    e.printStackTrace();
-                } catch (IllegalBlockSizeException e) {
-                    e.printStackTrace();
+                }
+                if (latch != null) {
+                    latch.countDown();
                 }
             }
         };
