@@ -38,6 +38,19 @@ limitations under the License.
         android:layout_margin="@dimen/view_margin"
         android:background="@color/accent" />
 
+    <TextView
+        android:id="@+id/access_alias_help_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/view_margin"
+        android:background="@color/accent"
+        android:padding="@dimen/view_padding"
+        android:textAlignment="center"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_secondary_size"
+        android:drawableStart="@drawable/info"
+        android:visibility="gone" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/access_unlock_keys_recycler"
         android:layout_width="match_parent"

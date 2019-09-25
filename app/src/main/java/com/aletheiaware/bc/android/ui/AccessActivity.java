@@ -18,8 +18,11 @@ package com.aletheiaware.bc.android.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +30,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.aletheiaware.bc.BCProto.KeyShare;
 import com.aletheiaware.bc.Cache;
@@ -55,7 +59,7 @@ import javax.crypto.NoSuchPaddingException;
 public class AccessActivity extends AppCompatActivity {
 
     private Cache cache;
-
+    private TextView aliasHelpText;
     private RecyclerView unlockKeysRecycler;
     private View unlockKeysSeparator;
 
@@ -66,7 +70,7 @@ public class AccessActivity extends AppCompatActivity {
         cache = new FileCache(getCacheDir());
 
         setContentView(R.layout.activity_access);
-
+        aliasHelpText = findViewById(R.id.access_alias_help_text);
         unlockKeysRecycler = findViewById(R.id.access_unlock_keys_recycler);
         unlockKeysSeparator = findViewById(R.id.access_unlock_keys_separator);
         Button importKeysButton = findViewById(R.id.access_import_keys);
@@ -141,6 +145,22 @@ public class AccessActivity extends AppCompatActivity {
             unlockKeysRecycler.setVisibility(View.VISIBLE);
             unlockKeysSeparator.setVisibility(View.VISIBLE);
             unlockKeysRecycler.setLayoutManager(new LinearLayoutManager(this));
+            aliasHelpText.setVisibility(View.GONE);
+            final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            for (String alias : ks) {
+                final String preference = getString(R.string.preference_access_alias_help, alias);
+                if (preferences.getBoolean(preference, true)) {
+                    aliasHelpText.setText(getString(R.string.access_alias_help_text, alias));
+                    aliasHelpText.setVisibility(View.VISIBLE);
+                    aliasHelpText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            preferences.edit().putBoolean(preference, false).apply();
+                            aliasHelpText.setVisibility(View.GONE);
+                        }
+                    });
+                }
+            }
             final KeysAdapter adapter = new KeysAdapter(this, ks) {
                 @Override
                 public void unlockKeys(final String alias) {
