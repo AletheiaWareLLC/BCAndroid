@@ -40,7 +40,7 @@ limitations under the License.
 
     <TextView
         android:id="@+id/access_alias_help_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/view_margin"
         android:background="@color/accent"
@@ -49,6 +49,7 @@ limitations under the License.
         android:textColor="@color/text_primary"
         android:textSize="@dimen/text_secondary_size"
         android:drawableStart="@drawable/info"
+        android:drawableEnd="@drawable/close"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
