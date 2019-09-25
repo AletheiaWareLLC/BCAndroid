@@ -16,22 +16,6 @@ limitations under the License.
 -->
 <resources>
 
-    <public name="background" type="color"/>
-    <public name="foreground" type="color"/>
-    <public name="primary" type="color"/>
-    <public name="primary_dark" type="color"/>
-    <public name="accent" type="color"/>
-    <public name="text_primary" type="color"/>
-    <public name="text_secondary" type="color"/>
-    <public name="text" type="color"/>
-    <public name="warning" type="color"/>
-
-    <public name="activity_padding" type="dimen"/>
-    <public name="view_margin" type="dimen"/>
-    <public name="view_padding" type="dimen"/>
-    <public name="text_primary_size" type="dimen"/>
-    <public name="text_secondary_size" type="dimen"/>
-
     <public name="aletheia_ware_llc_logo" type="drawable"/>
     <public name="app_logo" type="drawable"/>
     <public name="account" type="drawable"/>
