@@ -26,8 +26,8 @@ import android.widget.TextView;
 
 import com.aletheiaware.bc.android.R;
 import com.aletheiaware.common.android.utils.CommonAndroidUtils;
+import com.stripe.android.ApiResultCallback;
 import com.stripe.android.Stripe;
-import com.stripe.android.TokenCallback;
 import com.stripe.android.model.Card;
 import com.stripe.android.model.Token;
 import com.stripe.android.view.CardInputWidget;
@@ -97,7 +97,7 @@ public abstract class StripeDialog {
                         return;
                     }
                     Stripe stripe = new Stripe(activity, publishableKey);
-                    stripe.createToken(card, new TokenCallback() {
+                    stripe.createToken(card, new ApiResultCallback<Token>() {
                         @Override
                         public void onError(@NonNull Exception error) {
                             CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, R.string.error_stripe_invalid_payment, error);
