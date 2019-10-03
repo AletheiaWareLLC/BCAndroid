@@ -67,7 +67,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText aliasText;
     private EditText newPasswordText;
     private EditText confirmPasswordText;
-    private Button button;
+    private Button createButton;
     private ProgressBar progressBar;
     private TextView progressStatus;
     private AlertDialog progressDialog;
@@ -138,8 +138,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
         newPasswordText = findViewById(R.id.create_account_new_password_text);
         confirmPasswordText = findViewById(R.id.create_account_confirm_password_text);
-        button = findViewById(R.id.create_account_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        createButton = findViewById(R.id.create_account_button);
+        createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createAccount();

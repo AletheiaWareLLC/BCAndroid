@@ -28,12 +28,10 @@ import java.util.List;
 
 public abstract class KeysAdapter extends RecyclerView.Adapter<KeysAdapter.ViewHolder> {
 
-    private final Activity activity;
     private final LayoutInflater inflater;
     private final List<String> accounts;
 
     public KeysAdapter(Activity activity, List<String> accounts) {
-        this.activity = activity;
         this.inflater = activity.getLayoutInflater();
         this.accounts = accounts;
     }

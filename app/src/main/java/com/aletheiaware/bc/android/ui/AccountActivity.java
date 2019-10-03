@@ -152,6 +152,9 @@ public class AccountActivity extends AppCompatActivity {
                         break;
                 }
                 break;
+            default:
+                super.onActivityResult(requestCode, resultCode, intent);
+                break;
         }
     }
 
