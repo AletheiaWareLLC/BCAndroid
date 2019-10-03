@@ -17,6 +17,8 @@
 package com.aletheiaware.bc.android.utils;
 
 import android.content.Context;
+import android.os.Environment;
+
 import androidx.annotation.WorkerThread;
 
 import com.aletheiaware.bc.Cache;
@@ -99,6 +101,25 @@ public class BCAndroidUtils {
             return sum;
         }
         return file.length();
+    }
+
+    public static boolean copyCache(Context context) {
+        if (context != null) {
+            String state = Environment.getExternalStorageState();
+            if (!Environment.MEDIA_MOUNTED.equals(state)) {
+                return false;
+            }
+            File external = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+            if (external == null) {
+                return false;
+            }
+            File cache = context.getCacheDir();
+            if (cache == null) {
+                return false;
+            }
+            return CommonAndroidUtils.recursiveCopy(cache, new File(external, "BCCache"));
+        }
+        return false;
     }
 
     public static boolean purgeCache(Context context) {
