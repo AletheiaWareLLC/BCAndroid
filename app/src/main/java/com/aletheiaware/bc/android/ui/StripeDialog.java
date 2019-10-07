@@ -26,23 +26,26 @@ import android.widget.TextView;
 
 import com.aletheiaware.bc.android.R;
 import com.aletheiaware.common.android.utils.CommonAndroidUtils;
+import com.aletheiaware.finance.FinanceProto.Merchant;
 import com.stripe.android.ApiResultCallback;
 import com.stripe.android.Stripe;
 import com.stripe.android.model.Card;
 import com.stripe.android.model.Token;
 import com.stripe.android.view.CardInputWidget;
 
+import java.util.Set;
+
 public abstract class StripeDialog {
 
     private final Activity activity;
-    private final String publishableKey;
+    private final Set<Merchant> merchants;
     private final String description;
     private final String amount;
     private AlertDialog dialog;
 
-    public StripeDialog(Activity activity, String publishableKey, String description, String amount) {
+    public StripeDialog(Activity activity, Set<Merchant> merchants, String description, String amount) {
         this.activity = activity;
-        this.publishableKey = publishableKey;
+        this.merchants = merchants;
         this.description = description;
         this.amount = amount;
     }
@@ -96,18 +99,20 @@ public abstract class StripeDialog {
                         CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, activity.getString(R.string.error_invalid_cvc));
                         return;
                     }
-                    Stripe stripe = new Stripe(activity, publishableKey);
-                    stripe.createToken(card, new ApiResultCallback<Token>() {
-                        @Override
-                        public void onError(@NonNull Exception error) {
-                            CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, R.string.error_stripe_invalid_payment, error);
-                        }
+                    for (final Merchant merchant : merchants) {
+                        Stripe stripe = new Stripe(activity, merchant.getPublishableKey());
+                        stripe.createToken(card, new ApiResultCallback<Token>() {
+                            @Override
+                            public void onError(@NonNull Exception error) {
+                                CommonAndroidUtils.showErrorDialog(activity, R.style.AlertDialogTheme, R.string.error_stripe_invalid_payment, error);
+                            }
 
-                        @Override
-                        public void onSuccess(@NonNull Token token) {
-                            onSubmit(email, token);
-                        }
-                    });
+                            @Override
+                            public void onSuccess(@NonNull Token token) {
+                                onSubmit(merchant, email, token);
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -118,6 +123,6 @@ public abstract class StripeDialog {
         return dialog;
     }
 
-    public abstract void onSubmit(String email, Token token);
+    public abstract void onSubmit(Merchant merchant, String email, Token token);
 
 }
